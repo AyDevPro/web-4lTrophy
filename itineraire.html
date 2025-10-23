@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Itinéraire — 4L Trophy Desert Fox</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Archivo:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Fond orange dégradé */
+    body {
+      background: linear-gradient(180deg, #f2d2a2 0%, #f88b29 50%, #0b1e2d 100%) !important;
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+
+    /* Conteneur de scroll */
+    .journey {
+      position: relative;
+      min-height: 3000px;
+    }
+
+    /* Scène fixe au centre */
+    .road-scene {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90vw;
+      max-width: 600px;
+      height: 80vh;
+      max-height: 700px;
+      overflow: hidden;
+      background: transparent;
+      z-index: 1;
+    }
+
+    /* Container de la route qui défile */
+    .road-container {
+      position: absolute;
+      width: 500px;
+      left: 50%;
+      transform: translateX(-50%);
+      will-change: transform;
+    }
+
+    /* SVG de la route */
+    .road-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Voiture FIXE au centre */
+    .car-fixed {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 100;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,.4));
+    }
+
+    /* Points d'étape */
+    .checkpoint {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    /* Indices style jeu vidéo */
+    .game-tooltip {
+      position: fixed;
+      top: 50%;
+      right: 2rem;
+      transform: translateY(-50%);
+      max-width: 380px;
+      background: linear-gradient(135deg, #0b1e2d 0%, #0d2436 100%);
+      border: 3px solid var(--orange-600);
+      border-radius: 16px;
+      padding: 1.5rem;
+      color: white;
+      box-shadow: 0 15px 50px rgba(0,0,0,.6), 0 0 30px rgba(243,112,0,.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+    }
+
+    .game-tooltip.show {
+      opacity: 1;
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-50%) translateX(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(-50%) translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .tooltip-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--orange-600);
+    }
+
+    .tooltip-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--orange-600);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .tooltip-badge {
+      font-family: 'Archivo', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--orange-400);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .tooltip-title {
+      color: white;
+      margin: 0 0 0.75rem;
+      font-size: 1.4rem;
+      font-weight: 900;
+    }
+
+    .tooltip-text {
+      color: rgba(255,255,255,0.9);
+      margin: 0 0 1rem;
+      line-height: 1.6;
+    }
+
+    .tooltip-tip {
+      background: rgba(243,112,0,0.15);
+      border-left: 4px solid var(--orange-600);
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: var(--orange-300);
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .game-tooltip {
+        right: 1rem;
+        left: 1rem;
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="container">
+      <div class="logo">Desert Fox</div>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="itineraire.html">Itinéraire</a></li>
+        <li><a href="equipe.html">Équipe</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+        <li><a href="galerie.html">Galerie</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ITINÉRAIRE -->
+  <section style="padding:4vh 0;">
+    <div class="container">
+      <h2 data-aos="fade-right">Notre Itinéraire</h2>
+      <p data-aos="fade-right">Scrollez pour voir la route défiler sous la 4L !</p>
+
+      <!-- Zone de scroll -->
+      <div class="journey">
+        <!-- Scène fixe -->
+        <div class="road-scene">
+          <!-- Route qui défile -->
+          <div class="road-container" id="roadContainer">
+            <svg class="road-svg" viewBox="0 0 500 2000" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="roadGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style="stop-color:#0b1e2d;stop-opacity:1" />
+                  <stop offset="30%" style="stop-color:#f88b29;stop-opacity:1" />
+                  <stop offset="60%" style="stop-color:#f88b29;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#f2d2a2;stop-opacity:1" />
+                </linearGradient>
+                <filter id="shadow">
+                  <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.4"/>
+                </filter>
+              </defs>
+
+              <!-- Route en S (départ en haut, arrivée en bas) -->
+              <path id="roadPath" d="M250,100 C250,200 330,300 350,400 C370,500 370,600 250,700 C130,800 130,900 150,1000 C170,1100 250,1200 250,1300 C250,1400 330,1500 350,1600 C370,1700 250,1800 250,1900"
+                    stroke="url(#roadGrad)"
+                    stroke-width="40"
+                    stroke-linecap="round"
+                    fill="none"/>
+
+              <!-- Ligne centrale -->
+              <path d="M250,100 C250,200 330,300 350,400 C370,500 370,600 250,700 C130,800 130,900 150,1000 C170,1100 250,1200 250,1300 C250,1400 330,1500 350,1600 C370,1700 250,1800 250,1900"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-dasharray="15,10"
+                    fill="none"
+                    opacity="0.6"/>
+
+              <!-- Points d'étape -->
+              <g class="checkpoint">
+                <circle cx="250" cy="100" r="14" fill="#f57c1f" stroke="white" stroke-width="3"/>
+                <text x="250" y="80" text-anchor="middle" fill="white" font-weight="700" font-size="16">Départ</text>
+              </g>
+
+              <g class="checkpoint">
+                <circle cx="350" cy="400" r="14" fill="#f57c1f" stroke="white" stroke-width="3"/>
+                <text x="390" y="405" text-anchor="start" fill="white" font-weight="700" font-size="16">Algésiras</text>
+              </g>
+
+              <g class="checkpoint">
+                <circle cx="250" cy="700" r="14" fill="#f57c1f" stroke="white" stroke-width="3"/>
+                <text x="210" y="705" text-anchor="end" fill="white" font-weight="700" font-size="16">Rabat</text>
+              </g>
+
+              <g class="checkpoint">
+                <circle cx="150" cy="1000" r="14" fill="#f57c1f" stroke="white" stroke-width="3"/>
+                <text x="110" y="1005" text-anchor="end" fill="white" font-weight="700" font-size="16">Merzouga</text>
+              </g>
+
+              <g class="checkpoint">
+                <circle cx="250" cy="1900" r="14" fill="#f57c1f" stroke="white" stroke-width="3"/>
+                <text x="250" y="1940" text-anchor="middle" fill="white" font-weight="700" font-size="16">Arrivée</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Voiture FIXE au centre -->
+          <svg class="car-fixed" width="70" height="70" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <!-- Corps principal -->
+              <rect x="17" y="0" width="36" height="70" rx="4" fill="#f57c1f"/>
+              <!-- Capot -->
+              <rect x="19" y="0" width="32" height="15" rx="3" fill="#f37000"/>
+              <!-- Pare-brise -->
+              <rect x="21" y="17" width="28" height="8" rx="2" fill="#87CEEB" opacity="0.7"/>
+              <!-- Habitacle -->
+              <rect x="20" y="27" width="30" height="24" rx="2" fill="#f88b29"/>
+              <!-- Pare-brise arrière -->
+              <rect x="21" y="53" width="28" height="8" rx="2" fill="#87CEEB" opacity="0.7"/>
+              <!-- Coffre -->
+              <rect x="19" y="63" width="32" height="7" rx="2" fill="#f37000"/>
+              <!-- Roues avant -->
+              <rect x="15" y="7" width="6" height="12" rx="1" fill="#222"/>
+              <rect x="49" y="7" width="6" height="12" rx="1" fill="#222"/>
+              <!-- Roues arrière -->
+              <rect x="15" y="51" width="6" height="12" rx="1" fill="#222"/>
+              <rect x="49" y="51" width="6" height="12" rx="1" fill="#222"/>
+              <!-- Phares -->
+              <circle cx="25" y="3" r="3" fill="#FFD700"/>
+              <circle cx="45" cy="3" r="3" fill="#FFD700"/>
+              <!-- Feux -->
+              <circle cx="25" cy="67" r="2.5" fill="#FF0000"/>
+              <circle cx="45" cy="67" r="2.5" fill="#FF0000"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tooltips (indices aux étapes) -->
+  <div class="game-tooltip" id="tooltip1">
+    <div class="tooltip-header">
+      <div class="tooltip-icon">🏁</div>
+      <div class="tooltip-badge">Étape 1</div>
+    </div>
+    <h3 class="tooltip-title">Départ → Algésiras</h3>
+    <p class="tooltip-text">C'est parti ! Direction le sud de l'Espagne pour embarquer sur le ferry.</p>
+    <p class="tooltip-tip">💡 Conseil : Vérifier tous les niveaux avant l'embarquement !</p>
+  </div>
+
+  <div class="game-tooltip" id="tooltip2">
+    <div class="tooltip-header">
+      <div class="tooltip-icon">🌊</div>
+      <div class="tooltip-badge">Étape 2</div>
+    </div>
+    <h3 class="tooltip-title">Cap sur Rabat</h3>
+    <p class="tooltip-text">Route côtière marocaine, premiers paysages de dunes et ravitaillement.</p>
+    <p class="tooltip-tip">💡 Conseil : Vérifier la pression des pneus régulièrement !</p>
+  </div>
+
+  <div class="game-tooltip" id="tooltip3">
+    <div class="tooltip-header">
+      <div class="tooltip-icon">🏜️</div>
+      <div class="tooltip-badge">Étape 3</div>
+    </div>
+    <h3 class="tooltip-title">Les Dunes de Merzouga</h3>
+    <p class="tooltip-text">Le vrai désert ! Navigation aux caps, pistes sablonneuses.</p>
+    <p class="tooltip-tip">💡 Conseil : Dégonfler les pneus pour mieux flotter sur le sable.</p>
+  </div>
+
+  <div class="game-tooltip" id="tooltip4">
+    <div class="tooltip-header">
+      <div class="tooltip-icon">🎬</div>
+      <div class="tooltip-badge">Arrivée</div>
+    </div>
+    <h3 class="tooltip-title">Arrivée finale !</h3>
+    <p class="tooltip-text">Félicitations ! Vous avez parcouru tout le raid. La 4L a tenu bon jusqu'au bout !</p>
+    <p class="tooltip-tip">🎉 Bravo à toute l'équipe Desert Fox !</p>
+  </div>
+
+  <footer>
+    <div class="container">© 2025 Team Desert Fox — 4L Trophy</div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="script.js"></script>
+
+  <script>
+    // Init GSAP
+    gsap.registerPlugin(ScrollTrigger);
+
+    const roadContainer = document.getElementById('roadContainer');
+    const car = document.querySelector('.car-fixed');
+    const path = document.getElementById('roadPath');
+
+    // Animer la route qui défile (monte)
+    gsap.to(roadContainer, {
+      y: -1700, // La route monte
+      scrollTrigger: {
+        trigger: ".journey",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1
+      },
+      ease: "none"
+    });
+
+    // Faire suivre la voiture sur la route (position X + rotation)
+    ScrollTrigger.create({
+      trigger: ".journey",
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 1,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        const pathLength = path.getTotalLength();
+
+        // Position actuelle sur le path
+        const currentPos = pathLength * progress;
+        const nextPos = Math.min(currentPos + 20, pathLength);
+
+        const point1 = path.getPointAtLength(currentPos);
+        const point2 = path.getPointAtLength(nextPos);
+
+        // Calculer l'angle
+        const angle = Math.atan2(point2.y - point1.y, point2.x - point1.x) * 180 / Math.PI + 90;
+
+        // Position X de la voiture (suit la route latéralement)
+        // On ajuste pour que la voiture soit centrée dans le viewport
+        const carX = point1.x - 250; // 250 = centre du SVG
+
+        // Appliquer position et rotation à la voiture
+        gsap.set(car, {
+          x: carX,
+          rotation: angle
+        });
+      }
+    });
+
+    // Gérer l'affichage des tooltips aux VRAIES étapes
+    const checkpoints = [
+      { id: 'tooltip1', start: 0, end: 0.15 },      // Départ
+      { id: 'tooltip2', start: 0.15, end: 0.35 },   // Algésiras
+      { id: 'tooltip3', start: 0.35, end: 0.55 },   // Rabat
+      { id: 'tooltip4', start: 0.55, end: 1 }       // Merzouga → Arrivée
+    ];
+
+    ScrollTrigger.create({
+      trigger: ".journey",
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: (self) => {
+        const progress = self.progress;
+
+        checkpoints.forEach(checkpoint => {
+          const el = document.getElementById(checkpoint.id);
+          if (progress >= checkpoint.start && progress <= checkpoint.end) {
+            el.classList.add('show');
+          } else {
+            el.classList.remove('show');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

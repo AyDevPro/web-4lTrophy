@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Galerie — 4L Trophy Desert Fox</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Archivo:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Galerie grid - prête pour vraies images */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .gallery-item {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--sand-100), var(--orange-300));
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    .gallery-item:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="container">
+      <div class="logo">Desert Fox</div>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="itineraire.html">Itinéraire</a></li>
+        <li><a href="equipe.html">Équipe</a></li>
+        <li><a href="sponsors.html">Sponsors</a></li>
+        <li><a href="galerie.html">Galerie</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- GALERIE -->
+  <section>
+    <div class="container">
+      <h2 data-aos="fade-right">Galerie Photos</h2>
+      <p data-aos="fade-right">Revivez les meilleurs moments de notre aventure en images.</p>
+
+      <div class="panel">
+        <h3>Préparation</h3>
+        <div class="gallery-grid">
+          <div class="gallery-item" data-aos="zoom-in">📸</div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="50">📸</div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">📸</div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="150">📸</div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">📸</div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="250">📸</div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:2rem;">
+        <h3>Sur la route</h3>
+        <div class="gallery-grid">
+          <div class="gallery-item" data-aos="zoom-in">🏜️</div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="50">🏜️</div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">🏜️</div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="150">🏜️</div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">🏜️</div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="250">🏜️</div>
+        </div>
+      </div>
+
+      <!-- Section prête pour Swiper / GLightbox -->
+      <div class="panel" style="margin-top:2rem;" data-aos="fade-up">
+        <p style="text-align:center;color:#666;">
+          Plus de photos à venir pendant le raid ! Suivez-nous sur les réseaux sociaux pour les dernières mises à jour.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© 2025 Team Desert Fox — 4L Trophy</div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="script.js"></script>
+  <!-- Swiper et GLightbox à ajouter ici plus tard -->
+</body>
+</html>
