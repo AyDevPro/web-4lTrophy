@@ -10,12 +10,58 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* Fond orange dégradé */
+    /* Fond de base avec dégradé sur toute la page */
     body {
-      background: linear-gradient(180deg, #f2d2a2 0%, #f88b29 50%, #0b1e2d 100%) !important;
-      background-attachment: fixed;
       overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
     }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3500px;
+      background: linear-gradient(180deg,
+        #7fb069 0%,
+        #7fb069 25%,
+        #8fb973 35%,
+        #b5d99c 45%,
+        #d4e5b8 55%,
+        #f2d2a2 65%,
+        #f8a94a 75%,
+        #f88b29 85%,
+        #e67a20 92%,
+        #0b1e2d 100%);
+      z-index: -2;
+    }
+
+    /* Éléments de végétation */
+    .vegetation {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      pointer-events: none;
+      z-index: -1;
+      top: 0;
+      left: 0;
+    }
+
+    .tree {
+      position: fixed;
+      font-size: 3rem;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+
+    .tree-left-1 { left: 5%; top: 10%; }
+    .tree-left-2 { left: 10%; top: 30%; }
+    .tree-left-3 { left: 8%; top: 50%; }
+    .tree-right-1 { right: 5%; top: 15%; }
+    .tree-right-2 { right: 12%; top: 35%; }
+    .tree-right-3 { right: 7%; top: 55%; }
 
     /* Conteneur de scroll */
     .journey {
@@ -45,6 +91,8 @@
       left: 50%;
       transform: translateX(-50%);
       will-change: transform;
+      top: 50%;
+      margin-top: -100px; /* Ajuste pour que le départ soit au milieu */
     }
 
     /* SVG de la route */
@@ -59,7 +107,6 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
       z-index: 100;
       filter: drop-shadow(0 4px 8px rgba(0,0,0,.4));
     }
@@ -78,7 +125,6 @@
     .game-tooltip {
       position: fixed;
       top: 50%;
-      right: 2rem;
       transform: translateY(-50%);
       max-width: 380px;
       background: linear-gradient(135deg, #0b1e2d 0%, #0d2436 100%);
@@ -91,6 +137,14 @@
       pointer-events: none;
       transition: opacity 0.3s ease;
       z-index: 1000;
+    }
+
+    .game-tooltip.left {
+      left: 2rem;
+    }
+
+    .game-tooltip.right {
+      right: 2rem;
     }
 
     .game-tooltip.show {
@@ -186,9 +240,19 @@
     </div>
   </nav>
 
+  <!-- Végétation qui disparaît -->
+  <div class="vegetation" id="vegetation">
+    <div class="tree tree-left-1">🌳</div>
+    <div class="tree tree-left-2">🌲</div>
+    <div class="tree tree-left-3">🌳</div>
+    <div class="tree tree-right-1">🌲</div>
+    <div class="tree tree-right-2">🌳</div>
+    <div class="tree tree-right-3">🌲</div>
+  </div>
+
   <!-- ITINÉRAIRE -->
-  <section style="padding:4vh 0;">
-    <div class="container">
+  <section style="padding:4vh 0; background: transparent; position: relative; z-index: 1;">
+    <div class="container" style="position: relative; z-index: 2;">
       <h2 data-aos="fade-right">Notre Itinéraire</h2>
       <p data-aos="fade-right">Scrollez pour voir la route défiler sous la 4L !</p>
 
@@ -290,7 +354,7 @@
   </section>
 
   <!-- Tooltips (indices aux étapes) -->
-  <div class="game-tooltip" id="tooltip1">
+  <div class="game-tooltip left" id="tooltip1">
     <div class="tooltip-header">
       <div class="tooltip-icon">🏁</div>
       <div class="tooltip-badge">Étape 1</div>
@@ -300,7 +364,7 @@
     <p class="tooltip-tip">💡 Conseil : Vérifier tous les niveaux avant l'embarquement !</p>
   </div>
 
-  <div class="game-tooltip" id="tooltip2">
+  <div class="game-tooltip right" id="tooltip2">
     <div class="tooltip-header">
       <div class="tooltip-icon">🌊</div>
       <div class="tooltip-badge">Étape 2</div>
@@ -310,7 +374,7 @@
     <p class="tooltip-tip">💡 Conseil : Vérifier la pression des pneus régulièrement !</p>
   </div>
 
-  <div class="game-tooltip" id="tooltip3">
+  <div class="game-tooltip left" id="tooltip3">
     <div class="tooltip-header">
       <div class="tooltip-icon">🏜️</div>
       <div class="tooltip-badge">Étape 3</div>
@@ -320,7 +384,7 @@
     <p class="tooltip-tip">💡 Conseil : Dégonfler les pneus pour mieux flotter sur le sable.</p>
   </div>
 
-  <div class="game-tooltip" id="tooltip4">
+  <div class="game-tooltip right" id="tooltip4">
     <div class="tooltip-header">
       <div class="tooltip-icon">🎬</div>
       <div class="tooltip-badge">Arrivée</div>
@@ -347,15 +411,36 @@
     const roadContainer = document.getElementById('roadContainer');
     const car = document.querySelector('.car-fixed');
     const path = document.getElementById('roadPath');
+    const trees = document.querySelectorAll('.tree');
+
+    // Initialiser la position de la voiture au départ du path
+    gsap.set(car, {
+      x: -35, // Centrer horizontalement (-50% de 70px = -35px)
+      y: -35, // Centrer verticalement et remonter pour être sur le point de départ
+      rotation: 90 // Direction vers le bas au départ
+    });
+
+    // Faire disparaître la végétation progressivement
+    gsap.to(trees, {
+      opacity: 0,
+      scale: 0.8,
+      scrollTrigger: {
+        trigger: ".journey",
+        start: "top top",
+        end: "30% top",
+        scrub: true
+      },
+      ease: "power2.out"
+    });
 
     // Animer la route qui défile (monte)
     gsap.to(roadContainer, {
-      y: -1700, // La route monte
+      y: -1800, // La route monte (ajusté avec la nouvelle position de départ)
       scrollTrigger: {
         trigger: ".journey",
         start: "top top",
         end: "bottom bottom",
-        scrub: 1
+        scrub: true
       },
       ease: "none"
     });
@@ -365,7 +450,7 @@
       trigger: ".journey",
       start: "top top",
       end: "bottom bottom",
-      scrub: 1,
+      scrub: true,
       onUpdate: (self) => {
         const progress = self.progress;
         const pathLength = path.getTotalLength();
@@ -380,24 +465,51 @@
         // Calculer l'angle
         const angle = Math.atan2(point2.y - point1.y, point2.x - point1.x) * 180 / Math.PI + 90;
 
-        // Position X de la voiture (suit la route latéralement)
-        // On ajuste pour que la voiture soit centrée dans le viewport
-        const carX = point1.x - 250; // 250 = centre du SVG
+        // Position de la voiture - ajustement pour que la voiture soit exactement sur la route
+        // Position X relative au centre du SVG (250) avec offset pour centrer la voiture
+        const carX = point1.x - 250 - 35;
 
         // Appliquer position et rotation à la voiture
         gsap.set(car, {
           x: carX,
+          y: -35, // Garder la même position Y que l'initialisation
           rotation: angle
         });
       }
     });
 
-    // Gérer l'affichage des tooltips aux VRAIES étapes
+    // Gérer l'affichage des tooltips aux positions exactes des checkpoints
+    // Trouver le progress exact pour chaque checkpoint Y
+    const pathLength = path.getTotalLength();
+    const checkpointYPositions = [100, 400, 700, 1000, 1900]; // Y des checkpoints
+    const tooltipIds = ['tooltip1', 'tooltip2', 'tooltip3', 'tooltip4'];
+
+    // Calculer les progress pour chaque checkpoint
+    const checkpointProgresses = checkpointYPositions.map(targetY => {
+      // Chercher le point sur le path qui correspond à ce Y
+      let closestProgress = 0;
+      let minDiff = Infinity;
+
+      for (let i = 0; i <= 100; i++) {
+        const testProgress = i / 100;
+        const testPos = testProgress * pathLength;
+        const point = path.getPointAtLength(testPos);
+        const diff = Math.abs(point.y - targetY);
+
+        if (diff < minDiff) {
+          minDiff = diff;
+          closestProgress = testProgress;
+        }
+      }
+      return closestProgress;
+    });
+
+    // Créer les checkpoints avec une plage étroite autour de chaque position
     const checkpoints = [
-      { id: 'tooltip1', start: 0, end: 0.15 },      // Départ
-      { id: 'tooltip2', start: 0.15, end: 0.35 },   // Algésiras
-      { id: 'tooltip3', start: 0.35, end: 0.55 },   // Rabat
-      { id: 'tooltip4', start: 0.55, end: 1 }       // Merzouga → Arrivée
+      { id: 'tooltip1', center: checkpointProgresses[0], range: 0.08 },  // Départ
+      { id: 'tooltip2', center: checkpointProgresses[1], range: 0.08 },  // Algésiras
+      { id: 'tooltip3', center: checkpointProgresses[2], range: 0.08 },  // Rabat
+      { id: 'tooltip4', center: checkpointProgresses[3], range: 0.12 }   // Merzouga → Arrivée
     ];
 
     ScrollTrigger.create({
@@ -409,7 +521,10 @@
 
         checkpoints.forEach(checkpoint => {
           const el = document.getElementById(checkpoint.id);
-          if (progress >= checkpoint.start && progress <= checkpoint.end) {
+          const start = checkpoint.center - checkpoint.range / 2;
+          const end = checkpoint.center + checkpoint.range / 2;
+
+          if (progress >= start && progress <= end) {
             el.classList.add('show');
           } else {
             el.classList.remove('show');
