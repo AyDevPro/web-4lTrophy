@@ -17,33 +17,44 @@
     <link rel="stylesheet" href="styles.css" />
     <style>
       /* Fond de base avec dégradé sur toute la page */
-      body {
-        overflow-x: hidden;
-        min-height: 100vh;
-        position: relative;
+      html {
+        height: auto !important;
+        min-height: 0 !important;
       }
 
-      body::before {
+      body.itinerary-page {
+        background: transparent !important;
+        height: auto !important;
+        min-height: 0 !important;
+        position: relative;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden;
+        display: block !important;
+      }
+
+      body.itinerary-page::before {
         content: "";
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        min-height: 2600px;
+        min-height: 3500px;
         background: linear-gradient(
           180deg,
           #7fb069 0%,
-          #7fb069 15%,
-          #8fb973 22%,
-          #b5d99c 30%,
-          #d4e5b8 38%,
-          #f2d2a2 48%,
-          #f8a94a 58%,
-          #f88b29 68%,
-          #e67a20 80%,
-          #d4691e 88%,
-          #0b1e2d 100%
+          #7fb069 8%,
+          #8fb973 15%,
+          #b5d99c 22%,
+          #d4e5b8 30%,
+          #f2d2a2 38%,
+          #f8a94a 46%,
+          #f88b29 54%,
+          #e67a20 65%,
+          #d4691e 78%,
+          #0b1e2d 92%,
+          #000000 100%
         );
         z-index: -2;
       }
@@ -107,15 +118,10 @@
 
       .itinerary-experience {
         padding: 4vh 0 0;
-        background: linear-gradient(
-          180deg,
-          rgba(11, 30, 45, 0) 0%,
-          rgba(212, 105, 30, 0.85) 70%,
-          #d4691e 100%
-        );
+        background: transparent;
         position: relative;
         z-index: 1;
-        margin-top: 0;
+        margin: 0;
       }
 
       .itinerary-experience::before {
@@ -136,9 +142,17 @@
 
       .itinerary-page footer {
         color: #fff;
-        padding: 4vh 0;
+        padding-top: 4vh;
+        padding-bottom: 100px !important;
         text-align: center;
-        background: linear-gradient(180deg, #d4691e 0%, #0b1e2d 65%, #000000 100%);
+        background: transparent;
+        position: relative;
+        z-index: 2;
+        margin: 0 !important;
+      }
+
+      .itinerary-page footer ~ * {
+        display: none !important;
       }
 
       /* Éléments de végétation - font partie du fond scrollable */
@@ -146,12 +160,12 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        min-height: 1900px;
+        min-height: 2600px;
         top: 0;
         pointer-events: none;
         z-index: -1;
         left: 0;
-        overflow: hidden;
+        overflow: visible;
       }
 
       .tree {
@@ -364,6 +378,59 @@
         font-size: 2.7rem;
       }
 
+      /* Rochers supplémentaires pour aller jusqu'en bas */
+      .rock-left-8 {
+        left: 8%;
+        top: 1920px;
+        font-size: 2.5rem;
+      }
+      .rock-left-9 {
+        left: 20%;
+        top: 2040px;
+        font-size: 2.8rem;
+      }
+      .rock-left-10 {
+        left: 12%;
+        top: 2160px;
+        font-size: 2.7rem;
+      }
+      .rock-left-11 {
+        left: 7%;
+        top: 2280px;
+        font-size: 2.9rem;
+      }
+      .rock-left-12 {
+        left: 18%;
+        top: 2400px;
+        font-size: 2.6rem;
+      }
+
+      .rock-right-8 {
+        right: 9%;
+        top: 1960px;
+        font-size: 2.6rem;
+      }
+      .rock-right-9 {
+        right: 22%;
+        top: 2080px;
+        font-size: 2.4rem;
+      }
+      .rock-right-10 {
+        right: 14%;
+        top: 2200px;
+        font-size: 2.8rem;
+      }
+      .rock-right-11 {
+        right: 10%;
+        top: 2320px;
+        font-size: 2.5rem;
+      }
+      .rock-right-12 {
+        right: 20%;
+        top: 2440px;
+        font-size: 2.7rem;
+      }
+
       /* Buissons secs */
       .bush-left-1 {
         left: 17%;
@@ -417,11 +484,74 @@
         font-size: 2.1rem;
       }
 
+      /* Buissons et éléments supplémentaires jusqu'en bas */
+      .bush-left-6 {
+        left: 15%;
+        top: 1880px;
+        font-size: 2rem;
+      }
+      .bush-left-7 {
+        left: 9%;
+        top: 2000px;
+        font-size: 1.9rem;
+      }
+      .bush-left-8 {
+        left: 21%;
+        top: 2120px;
+        font-size: 2.1rem;
+      }
+      .bush-left-9 {
+        left: 14%;
+        top: 2240px;
+        font-size: 2rem;
+      }
+      .bush-left-10 {
+        left: 11%;
+        top: 2360px;
+        font-size: 2.1rem;
+      }
+      .bush-left-11 {
+        left: 23%;
+        top: 2480px;
+        font-size: 2rem;
+      }
+
+      .bush-right-6 {
+        right: 17%;
+        top: 1900px;
+        font-size: 2rem;
+      }
+      .bush-right-7 {
+        right: 11%;
+        top: 2020px;
+        font-size: 1.9rem;
+      }
+      .bush-right-8 {
+        right: 24%;
+        top: 2140px;
+        font-size: 2.1rem;
+      }
+      .bush-right-9 {
+        right: 15%;
+        top: 2260px;
+        font-size: 2rem;
+      }
+      .bush-right-10 {
+        right: 13%;
+        top: 2380px;
+        font-size: 2.1rem;
+      }
+      .bush-right-11 {
+        right: 25%;
+        top: 2500px;
+        font-size: 2rem;
+      }
+
       /* Conteneur de scroll */
       .journey {
         position: relative;
         margin-top: 8vh;
-        padding-bottom: 14vh;
+        padding-bottom: 2vh;
       }
 
       /* Scène principale */
@@ -697,6 +827,11 @@
       <div class="desert-element rock-left-5">🪨</div>
       <div class="desert-element rock-left-6">🪨</div>
       <div class="desert-element rock-left-7">🪨</div>
+      <div class="desert-element rock-left-8">🪨</div>
+      <div class="desert-element rock-left-9">🪨</div>
+      <div class="desert-element rock-left-10">🪨</div>
+      <div class="desert-element rock-left-11">🪨</div>
+      <div class="desert-element rock-left-12">🪨</div>
 
       <!-- Rochers désert Sahara - droite -->
       <div class="desert-element rock-right-1">🪨</div>
@@ -706,6 +841,11 @@
       <div class="desert-element rock-right-5">🪨</div>
       <div class="desert-element rock-right-6">🪨</div>
       <div class="desert-element rock-right-7">🪨</div>
+      <div class="desert-element rock-right-8">🪨</div>
+      <div class="desert-element rock-right-9">🪨</div>
+      <div class="desert-element rock-right-10">🪨</div>
+      <div class="desert-element rock-right-11">🪨</div>
+      <div class="desert-element rock-right-12">🪨</div>
 
       <!-- Buissons secs - gauche -->
       <div class="desert-element bush-left-1">🏜️</div>
@@ -713,6 +853,12 @@
       <div class="desert-element bush-left-3">🐪</div>
       <div class="desert-element bush-left-4">🐪</div>
       <div class="desert-element bush-left-5">🐪</div>
+      <div class="desert-element bush-left-6">🏜️</div>
+      <div class="desert-element bush-left-7">🐪</div>
+      <div class="desert-element bush-left-8">🦂</div>
+      <div class="desert-element bush-left-9">🐪</div>
+      <div class="desert-element bush-left-10">🏜️</div>
+      <div class="desert-element bush-left-11">🐪</div>
 
       <!-- Buissons secs - droite -->
       <div class="desert-element bush-right-1">🐪</div>
@@ -720,6 +866,12 @@
       <div class="desert-element bush-right-3">🐪</div>
       <div class="desert-element bush-right-4">🦂</div>
       <div class="desert-element bush-right-5">🦂</div>
+      <div class="desert-element bush-right-6">🐪</div>
+      <div class="desert-element bush-right-7">🏜️</div>
+      <div class="desert-element bush-right-8">🐪</div>
+      <div class="desert-element bush-right-9">🦂</div>
+      <div class="desert-element bush-right-10">🐪</div>
+      <div class="desert-element bush-right-11">🏜️</div>
     </div>
 
     <!-- ITINÉRAIRE -->
@@ -746,18 +898,22 @@
                   >
                     <stop
                       offset="0%"
-                      style="stop-color: #7fb069; stop-opacity: 1"
+                      style="stop-color: #6b6b6b; stop-opacity: 1"
                     />
                     <stop
-                      offset="15%"
-                      style="stop-color: #7fb069; stop-opacity: 1"
+                      offset="20%"
+                      style="stop-color: #6b6b6b; stop-opacity: 1"
                     />
                     <stop
-                      offset="35%"
+                      offset="30%"
+                      style="stop-color: #8b8b8b; stop-opacity: 1"
+                    />
+                    <stop
+                      offset="40%"
                       style="stop-color: #f88b29; stop-opacity: 1"
                     />
                     <stop
-                      offset="60%"
+                      offset="65%"
                       style="stop-color: #f88b29; stop-opacity: 1"
                     />
                     <stop
