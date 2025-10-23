@@ -1,537 +1,1031 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Itinéraire — 4L Trophy Desert Fox</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Archivo:wght@700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    /* Fond de base avec dégradé sur toute la page */
-    body {
-      overflow-x: hidden;
-      min-height: 100vh;
-      position: relative;
-    }
-
-    body::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3500px;
-      background: linear-gradient(180deg,
-        #7fb069 0%,
-        #7fb069 25%,
-        #8fb973 35%,
-        #b5d99c 45%,
-        #d4e5b8 55%,
-        #f2d2a2 65%,
-        #f8a94a 75%,
-        #f88b29 85%,
-        #e67a20 92%,
-        #0b1e2d 100%);
-      z-index: -2;
-    }
-
-    /* Éléments de végétation */
-    .vegetation {
-      position: fixed;
-      width: 100%;
-      height: 100vh;
-      pointer-events: none;
-      z-index: -1;
-      top: 0;
-      left: 0;
-    }
-
-    .tree {
-      position: fixed;
-      font-size: 3rem;
-      opacity: 0.6;
-      transition: opacity 0.3s ease;
-    }
-
-    .tree-left-1 { left: 5%; top: 10%; }
-    .tree-left-2 { left: 10%; top: 30%; }
-    .tree-left-3 { left: 8%; top: 50%; }
-    .tree-right-1 { right: 5%; top: 15%; }
-    .tree-right-2 { right: 12%; top: 35%; }
-    .tree-right-3 { right: 7%; top: 55%; }
-
-    /* Conteneur de scroll */
-    .journey {
-      position: relative;
-      min-height: 3000px;
-    }
-
-    /* Scène fixe au centre */
-    .road-scene {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90vw;
-      max-width: 600px;
-      height: 80vh;
-      max-height: 700px;
-      overflow: hidden;
-      background: transparent;
-      z-index: 1;
-    }
-
-    /* Container de la route qui défile */
-    .road-container {
-      position: absolute;
-      width: 500px;
-      left: 50%;
-      transform: translateX(-50%);
-      will-change: transform;
-      top: 50%;
-      margin-top: -100px; /* Ajuste pour que le départ soit au milieu */
-    }
-
-    /* SVG de la route */
-    .road-svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Voiture FIXE au centre */
-    .car-fixed {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      z-index: 100;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,.4));
-    }
-
-    /* Points d'étape */
-    .checkpoint {
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-
-    /* Indices style jeu vidéo */
-    .game-tooltip {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      max-width: 380px;
-      background: linear-gradient(135deg, #0b1e2d 0%, #0d2436 100%);
-      border: 3px solid var(--orange-600);
-      border-radius: 16px;
-      padding: 1.5rem;
-      color: white;
-      box-shadow: 0 15px 50px rgba(0,0,0,.6), 0 0 30px rgba(243,112,0,.4);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      z-index: 1000;
-    }
-
-    .game-tooltip.left {
-      left: 2rem;
-    }
-
-    .game-tooltip.right {
-      right: 2rem;
-    }
-
-    .game-tooltip.show {
-      opacity: 1;
-      animation: slideIn 0.5s ease;
-    }
-
-    @keyframes slideIn {
-      from {
-        transform: translateY(-50%) translateX(50px);
-        opacity: 0;
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Itinéraire — La Jerricane #311</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Archivo:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Fond de base avec dégradé sur toute la page */
+      body {
+        overflow-x: hidden;
+        min-height: 100vh;
+        position: relative;
       }
-      to {
-        transform: translateY(-50%) translateX(0);
-        opacity: 1;
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3500px;
+        background: linear-gradient(
+          180deg,
+          #7fb069 0%,
+          #7fb069 25%,
+          #8fb973 35%,
+          #b5d99c 45%,
+          #d4e5b8 55%,
+          #f2d2a2 65%,
+          #f8a94a 75%,
+          #f88b29 85%,
+          #e67a20 92%,
+          #0b1e2d 100%
+        );
+        z-index: -2;
       }
-    }
 
-    .tooltip-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 2px solid var(--orange-600);
-    }
+      /* Éléments de végétation - font partie du fond scrollable */
+      .vegetation {
+        position: absolute;
+        width: 100%;
+        height: 3500px;
+        pointer-events: none;
+        z-index: -1;
+        top: 0;
+        left: 0;
+      }
 
-    .tooltip-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--orange-600);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-    }
+      .tree {
+        position: absolute;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+      }
 
-    .tooltip-badge {
-      font-family: 'Archivo', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: var(--orange-400);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
+      /* Arbres du haut - France/Espagne (vert) - positions aléatoires */
+      .tree-left-1 {
+        left: 2%;
+        top: 320px;
+        font-size: 3.5rem;
+      }
+      .tree-left-2 {
+        left: 18%;
+        top: 450px;
+        font-size: 3rem;
+      }
+      .tree-left-3 {
+        left: 8%;
+        top: 580px;
+        font-size: 3.2rem;
+      }
+      .tree-left-4 {
+        left: 25%;
+        top: 710px;
+        font-size: 2.8rem;
+      }
+      .tree-left-5 {
+        left: 5%;
+        top: 840px;
+        font-size: 3.3rem;
+      }
+      .tree-left-6 {
+        left: 22%;
+        top: 970px;
+        font-size: 2.5rem;
+      }
+      .tree-left-7 {
+        left: 12%;
+        top: 1100px;
+        font-size: 3.1rem;
+      }
+      .tree-left-8 {
+        left: 3%;
+        top: 1230px;
+        font-size: 2.9rem;
+      }
+      .tree-left-9 {
+        left: 28%;
+        top: 1360px;
+        font-size: 3.4rem;
+      }
 
-    .tooltip-title {
-      color: white;
-      margin: 0 0 0.75rem;
-      font-size: 1.4rem;
-      font-weight: 900;
-    }
+      .tree-right-1 {
+        right: 4%;
+        top: 380px;
+        font-size: 3rem;
+      }
+      .tree-right-2 {
+        right: 20%;
+        top: 510px;
+        font-size: 3.4rem;
+      }
+      .tree-right-3 {
+        right: 10%;
+        top: 640px;
+        font-size: 2.9rem;
+      }
+      .tree-right-4 {
+        right: 27%;
+        top: 770px;
+        font-size: 3.1rem;
+      }
+      .tree-right-5 {
+        right: 7%;
+        top: 900px;
+        font-size: 2.7rem;
+      }
+      .tree-right-6 {
+        right: 23%;
+        top: 1030px;
+        font-size: 3rem;
+      }
+      .tree-right-7 {
+        right: 15%;
+        top: 1160px;
+        font-size: 3.3rem;
+      }
+      .tree-right-8 {
+        right: 5%;
+        top: 1290px;
+        font-size: 2.8rem;
+      }
+      .tree-right-9 {
+        right: 29%;
+        top: 1420px;
+        font-size: 3.2rem;
+      }
 
-    .tooltip-text {
-      color: rgba(255,255,255,0.9);
-      margin: 0 0 1rem;
-      line-height: 1.6;
-    }
+      /* Palmiers - zone transition Maroc */
+      .palm {
+        position: absolute;
+        font-size: 3rem;
+        opacity: 0.65;
+      }
 
-    .tooltip-tip {
-      background: rgba(243,112,0,0.15);
-      border-left: 4px solid var(--orange-600);
-      padding: 0.75rem 1rem;
-      border-radius: 4px;
-      font-size: 0.9rem;
-      color: var(--orange-300);
-      margin: 0;
-    }
+      .palm-left-1 {
+        left: 14%;
+        top: 1500px;
+      }
+      .palm-left-2 {
+        left: 6%;
+        top: 1680px;
+      }
+      .palm-left-3 {
+        left: 24%;
+        top: 1860px;
+      }
+      .palm-right-1 {
+        right: 11%;
+        top: 1560px;
+      }
+      .palm-right-2 {
+        right: 26%;
+        top: 1740px;
+      }
+      .palm-right-3 {
+        right: 8%;
+        top: 1920px;
+      }
 
-    @media (max-width: 768px) {
+      /* Éléments du désert Saharien */
+      .desert-element {
+        position: absolute;
+        opacity: 0.6;
+      }
+
+      /* Rochers */
+      .rock-left-1 {
+        left: 3%;
+        top: 2050px;
+        font-size: 2.5rem;
+      }
+      .rock-left-2 {
+        left: 19%;
+        top: 2250px;
+        font-size: 2.8rem;
+      }
+      .rock-left-3 {
+        left: 9%;
+        top: 2450px;
+        font-size: 2.2rem;
+      }
+      .rock-left-4 {
+        left: 27%;
+        top: 2650px;
+        font-size: 3rem;
+      }
+      .rock-left-5 {
+        left: 6%;
+        top: 2850px;
+        font-size: 2.6rem;
+      }
+      .rock-left-6 {
+        left: 22%;
+        top: 3050px;
+        font-size: 2.4rem;
+      }
+      .rock-left-7 {
+        left: 13%;
+        top: 3250px;
+        font-size: 2.7rem;
+      }
+
+      .rock-right-1 {
+        right: 5%;
+        top: 2120px;
+        font-size: 2.6rem;
+      }
+      .rock-right-2 {
+        right: 21%;
+        top: 2320px;
+        font-size: 2.4rem;
+      }
+      .rock-right-3 {
+        right: 12%;
+        top: 2520px;
+        font-size: 2.9rem;
+      }
+      .rock-right-4 {
+        right: 28%;
+        top: 2720px;
+        font-size: 2.3rem;
+      }
+      .rock-right-5 {
+        right: 8%;
+        top: 2920px;
+        font-size: 2.8rem;
+      }
+      .rock-right-6 {
+        right: 24%;
+        top: 3120px;
+        font-size: 2.5rem;
+      }
+      .rock-right-7 {
+        right: 16%;
+        top: 3320px;
+        font-size: 2.7rem;
+      }
+
+      /* Buissons secs */
+      .bush-left-1 {
+        left: 17%;
+        top: 2180px;
+        font-size: 2rem;
+      }
+      .bush-left-2 {
+        left: 4%;
+        top: 2380px;
+        font-size: 1.8rem;
+      }
+      .bush-left-3 {
+        left: 29%;
+        top: 2580px;
+        font-size: 2.2rem;
+      }
+      .bush-left-4 {
+        left: 11%;
+        top: 2780px;
+        font-size: 1.9rem;
+      }
+      .bush-left-5 {
+        left: 25%;
+        top: 2980px;
+        font-size: 2.1rem;
+      }
+
+      .bush-right-1 {
+        right: 18%;
+        top: 2210px;
+        font-size: 2rem;
+      }
+      .bush-right-2 {
+        right: 6%;
+        top: 2410px;
+        font-size: 1.8rem;
+      }
+      .bush-right-3 {
+        right: 30%;
+        top: 2610px;
+        font-size: 2.2rem;
+      }
+      .bush-right-4 {
+        right: 13%;
+        top: 2810px;
+        font-size: 1.9rem;
+      }
+      .bush-right-5 {
+        right: 26%;
+        top: 3010px;
+        font-size: 2.1rem;
+      }
+
+      /* Conteneur de scroll */
+      .journey {
+        position: relative;
+        min-height: 3000px;
+      }
+
+      /* Scène fixe au centre */
+      .road-scene {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90vw;
+        max-width: 600px;
+        height: 80vh;
+        max-height: 700px;
+        overflow: hidden;
+        background: transparent;
+        z-index: 1;
+      }
+
+      /* Container de la route qui défile */
+      .road-container {
+        position: absolute;
+        width: 500px;
+        left: 50%;
+        transform: translateX(-50%);
+        will-change: transform;
+        top: 50%;
+        margin-top: -100px; /* Ajuste pour que le départ soit au milieu */
+      }
+
+      /* SVG de la route */
+      .road-svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Voiture FIXE au centre */
+      .car-fixed {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 100;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+      }
+
+      /* Points d'étape */
+      .checkpoint {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+      }
+
+      /* Indices style jeu vidéo */
       .game-tooltip {
-        right: 1rem;
-        left: 1rem;
-        max-width: none;
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        max-width: 380px;
+        background: linear-gradient(135deg, #0b1e2d 0%, #0d2436 100%);
+        border: 3px solid var(--orange-600);
+        border-radius: 16px;
+        padding: 1.5rem;
+        color: white;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6),
+          0 0 30px rgba(243, 112, 0, 0.4);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
       }
-    }
-  </style>
-</head>
-<body>
-  <!-- NAVIGATION -->
-  <nav>
-    <div class="container">
-      <div class="logo">Desert Fox</div>
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="itineraire.html">Itinéraire</a></li>
-        <li><a href="equipe.html">Équipe</a></li>
-        <li><a href="sponsors.html">Sponsors</a></li>
-        <li><a href="galerie.html">Galerie</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+
+      .game-tooltip.left {
+        left: 2rem;
+      }
+
+      .game-tooltip.right {
+        right: 2rem;
+      }
+
+      .game-tooltip.show {
+        opacity: 1;
+        animation: slideIn 0.5s ease;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateY(-50%) translateX(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(-50%) translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .tooltip-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--orange-600);
+      }
+
+      .tooltip-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--orange-600);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+      }
+
+      .tooltip-badge {
+        font-family: "Archivo", sans-serif;
+        font-size: 1.1rem;
+        font-weight: 900;
+        color: var(--orange-400);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .tooltip-title {
+        color: white;
+        margin: 0 0 0.75rem;
+        font-size: 1.4rem;
+        font-weight: 900;
+      }
+
+      .tooltip-text {
+        color: rgba(255, 255, 255, 0.9);
+        margin: 0 0 1rem;
+        line-height: 1.6;
+      }
+
+      .tooltip-tip {
+        background: rgba(243, 112, 0, 0.15);
+        border-left: 4px solid var(--orange-600);
+        padding: 0.75rem 1rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        color: var(--orange-300);
+        margin: 0;
+      }
+
+      @media (max-width: 768px) {
+        .game-tooltip {
+          right: 1rem;
+          left: 1rem;
+          max-width: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVIGATION -->
+    <nav>
+      <div class="container">
+        <div class="logo">La Jerricane</div>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="itineraire.html">Itinéraire</a></li>
+          <li><a href="equipe.html">Équipe</a></li>
+          <li><a href="sponsors.html">Sponsors</a></li>
+          <li><a href="galerie.html">Galerie</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Végétation intégrée au fond -->
+    <div class="vegetation" id="vegetation">
+      <!-- Arbres France/Espagne - gauche -->
+      <div class="tree tree-left-1">🌳</div>
+      <div class="tree tree-left-2">🌲</div>
+      <div class="tree tree-left-3">🌳</div>
+      <div class="tree tree-left-4">🌲</div>
+      <div class="tree tree-left-5">🌳</div>
+      <div class="tree tree-left-6">🌲</div>
+      <div class="tree tree-left-7">🌳</div>
+      <div class="tree tree-left-8">🌲</div>
+      <div class="tree tree-left-9">🌳</div>
+
+      <!-- Arbres France/Espagne - droite -->
+      <div class="tree tree-right-1">🌲</div>
+      <div class="tree tree-right-2">🌳</div>
+      <div class="tree tree-right-3">🌲</div>
+      <div class="tree tree-right-4">🌳</div>
+      <div class="tree tree-right-5">🌲</div>
+      <div class="tree tree-right-6">🌳</div>
+      <div class="tree tree-right-7">🌲</div>
+      <div class="tree tree-right-8">🌳</div>
+      <div class="tree tree-right-9">🌲</div>
+
+      <!-- Palmiers zone Maroc - gauche -->
+      <div class="palm palm-left-1">🌴</div>
+      <div class="palm palm-left-2">🌴</div>
+      <div class="palm palm-left-3">🌴</div>
+
+      <!-- Palmiers zone Maroc - droite -->
+      <div class="palm palm-right-1">🌴</div>
+      <div class="palm palm-right-2">🌴</div>
+      <div class="palm palm-right-3">🌴</div>
+
+      <!-- Rochers désert Sahara - gauche -->
+      <div class="desert-element rock-left-1">🪨</div>
+      <div class="desert-element rock-left-2">🪨</div>
+      <div class="desert-element rock-left-3">🪨</div>
+      <div class="desert-element rock-left-4">🪨</div>
+      <div class="desert-element rock-left-5">🪨</div>
+      <div class="desert-element rock-left-6">🪨</div>
+      <div class="desert-element rock-left-7">🪨</div>
+
+      <!-- Rochers désert Sahara - droite -->
+      <div class="desert-element rock-right-1">🪨</div>
+      <div class="desert-element rock-right-2">🪨</div>
+      <div class="desert-element rock-right-3">🪨</div>
+      <div class="desert-element rock-right-4">🪨</div>
+      <div class="desert-element rock-right-5">🪨</div>
+      <div class="desert-element rock-right-6">🪨</div>
+      <div class="desert-element rock-right-7">🪨</div>
+
+      <!-- Buissons secs - gauche -->
+      <div class="desert-element bush-left-1">🏜️</div>
+      <div class="desert-element bush-left-2">🏜️</div>
+      <div class="desert-element bush-left-3">🐪</div>
+      <div class="desert-element bush-left-4">🐪</div>
+      <div class="desert-element bush-left-5">🐪</div>
+
+      <!-- Buissons secs - droite -->
+      <div class="desert-element bush-right-1">🐪</div>
+      <div class="desert-element bush-right-2">🦂</div>
+      <div class="desert-element bush-right-3">🐪</div>
+      <div class="desert-element bush-right-4">🦂</div>
+      <div class="desert-element bush-right-5">🦂</div>
     </div>
-  </nav>
 
-  <!-- Végétation qui disparaît -->
-  <div class="vegetation" id="vegetation">
-    <div class="tree tree-left-1">🌳</div>
-    <div class="tree tree-left-2">🌲</div>
-    <div class="tree tree-left-3">🌳</div>
-    <div class="tree tree-right-1">🌲</div>
-    <div class="tree tree-right-2">🌳</div>
-    <div class="tree tree-right-3">🌲</div>
-  </div>
+    <!-- ITINÉRAIRE -->
+    <section
+      style="
+        padding: 4vh 0;
+        background: transparent;
+        position: relative;
+        z-index: 1;
+      "
+    >
+      <div class="container" style="position: relative; z-index: 2">
+        <h2 data-aos="fade-right">Notre Itinéraire</h2>
+        <p data-aos="fade-right">
+          Scrollez pour voir la route défiler sous la 4L !
+        </p>
 
-  <!-- ITINÉRAIRE -->
-  <section style="padding:4vh 0; background: transparent; position: relative; z-index: 1;">
-    <div class="container" style="position: relative; z-index: 2;">
-      <h2 data-aos="fade-right">Notre Itinéraire</h2>
-      <p data-aos="fade-right">Scrollez pour voir la route défiler sous la 4L !</p>
+        <!-- Zone de scroll -->
+        <div class="journey">
+          <!-- Scène fixe -->
+          <div class="road-scene">
+            <!-- Route qui défile -->
+            <div class="road-container" id="roadContainer">
+              <svg
+                class="road-svg"
+                viewBox="0 0 500 2000"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <linearGradient
+                    id="roadGrad"
+                    x1="0%"
+                    y1="0%"
+                    x2="0%"
+                    y2="100%"
+                  >
+                    <stop
+                      offset="0%"
+                      style="stop-color: #0b1e2d; stop-opacity: 1"
+                    />
+                    <stop
+                      offset="30%"
+                      style="stop-color: #f88b29; stop-opacity: 1"
+                    />
+                    <stop
+                      offset="60%"
+                      style="stop-color: #f88b29; stop-opacity: 1"
+                    />
+                    <stop
+                      offset="100%"
+                      style="stop-color: #f2d2a2; stop-opacity: 1"
+                    />
+                  </linearGradient>
+                  <filter id="shadow">
+                    <feDropShadow
+                      dx="0"
+                      dy="3"
+                      stdDeviation="4"
+                      flood-opacity="0.4"
+                    />
+                  </filter>
+                </defs>
 
-      <!-- Zone de scroll -->
-      <div class="journey">
-        <!-- Scène fixe -->
-        <div class="road-scene">
-          <!-- Route qui défile -->
-          <div class="road-container" id="roadContainer">
-            <svg class="road-svg" viewBox="0 0 500 2000" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="roadGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" style="stop-color:#0b1e2d;stop-opacity:1" />
-                  <stop offset="30%" style="stop-color:#f88b29;stop-opacity:1" />
-                  <stop offset="60%" style="stop-color:#f88b29;stop-opacity:1" />
-                  <stop offset="100%" style="stop-color:#f2d2a2;stop-opacity:1" />
-                </linearGradient>
-                <filter id="shadow">
-                  <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.4"/>
-                </filter>
-              </defs>
+                <!-- Route en S (départ en haut, arrivée en bas) -->
+                <path
+                  id="roadPath"
+                  d="M250,100 C250,200 330,300 350,400 C370,500 370,600 250,700 C130,800 130,900 150,1000 C170,1100 250,1200 250,1300 C250,1400 330,1500 350,1600 C370,1700 250,1800 250,1900"
+                  stroke="url(#roadGrad)"
+                  stroke-width="40"
+                  stroke-linecap="round"
+                  fill="none"
+                />
 
-              <!-- Route en S (départ en haut, arrivée en bas) -->
-              <path id="roadPath" d="M250,100 C250,200 330,300 350,400 C370,500 370,600 250,700 C130,800 130,900 150,1000 C170,1100 250,1200 250,1300 C250,1400 330,1500 350,1600 C370,1700 250,1800 250,1900"
-                    stroke="url(#roadGrad)"
-                    stroke-width="40"
-                    stroke-linecap="round"
-                    fill="none"/>
+                <!-- Ligne centrale -->
+                <path
+                  d="M250,100 C250,200 330,300 350,400 C370,500 370,600 250,700 C130,800 130,900 150,1000 C170,1100 250,1200 250,1300 C250,1400 330,1500 350,1600 C370,1700 250,1800 250,1900"
+                  stroke="white"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-dasharray="15,10"
+                  fill="none"
+                  opacity="0.6"
+                />
 
-              <!-- Ligne centrale -->
-              <path d="M250,100 C250,200 330,300 350,400 C370,500 370,600 250,700 C130,800 130,900 150,1000 C170,1100 250,1200 250,1300 C250,1400 330,1500 350,1600 C370,1700 250,1800 250,1900"
+                <!-- Points d'étape -->
+                <g class="checkpoint">
+                  <circle
+                    cx="250"
+                    cy="100"
+                    r="14"
+                    fill="#f57c1f"
                     stroke="white"
                     stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-dasharray="15,10"
-                    fill="none"
-                    opacity="0.6"/>
+                  />
+                  <text
+                    x="250"
+                    y="80"
+                    text-anchor="middle"
+                    fill="white"
+                    font-weight="700"
+                    font-size="16"
+                  >
+                    Biarritz
+                  </text>
+                </g>
 
-              <!-- Points d'étape -->
-              <g class="checkpoint">
-                <circle cx="250" cy="100" r="14" fill="#f57c1f" stroke="white" stroke-width="3"/>
-                <text x="250" y="80" text-anchor="middle" fill="white" font-weight="700" font-size="16">Départ</text>
-              </g>
+                <g class="checkpoint">
+                  <circle
+                    cx="350"
+                    cy="400"
+                    r="14"
+                    fill="#f57c1f"
+                    stroke="white"
+                    stroke-width="3"
+                  />
+                  <text
+                    x="390"
+                    y="405"
+                    text-anchor="start"
+                    fill="white"
+                    font-weight="700"
+                    font-size="16"
+                  >
+                    Algeciras
+                  </text>
+                </g>
 
-              <g class="checkpoint">
-                <circle cx="350" cy="400" r="14" fill="#f57c1f" stroke="white" stroke-width="3"/>
-                <text x="390" y="405" text-anchor="start" fill="white" font-weight="700" font-size="16">Algésiras</text>
-              </g>
+                <g class="checkpoint">
+                  <circle
+                    cx="250"
+                    cy="700"
+                    r="14"
+                    fill="#f57c1f"
+                    stroke="white"
+                    stroke-width="3"
+                  />
+                  <text
+                    x="210"
+                    y="705"
+                    text-anchor="end"
+                    fill="white"
+                    font-weight="700"
+                    font-size="16"
+                  >
+                    Gibraltar
+                  </text>
+                </g>
 
-              <g class="checkpoint">
-                <circle cx="250" cy="700" r="14" fill="#f57c1f" stroke="white" stroke-width="3"/>
-                <text x="210" y="705" text-anchor="end" fill="white" font-weight="700" font-size="16">Rabat</text>
-              </g>
+                <g class="checkpoint">
+                  <circle
+                    cx="150"
+                    cy="1000"
+                    r="14"
+                    fill="#f57c1f"
+                    stroke="white"
+                    stroke-width="3"
+                  />
+                  <text
+                    x="110"
+                    y="1005"
+                    text-anchor="end"
+                    fill="white"
+                    font-weight="700"
+                    font-size="16"
+                  >
+                    Grand Sud
+                  </text>
+                </g>
 
-              <g class="checkpoint">
-                <circle cx="150" cy="1000" r="14" fill="#f57c1f" stroke="white" stroke-width="3"/>
-                <text x="110" y="1005" text-anchor="end" fill="white" font-weight="700" font-size="16">Merzouga</text>
-              </g>
+                <g class="checkpoint">
+                  <circle
+                    cx="250"
+                    cy="1900"
+                    r="14"
+                    fill="#f57c1f"
+                    stroke="white"
+                    stroke-width="3"
+                  />
+                  <text
+                    x="250"
+                    y="1940"
+                    text-anchor="middle"
+                    fill="white"
+                    font-weight="700"
+                    font-size="16"
+                  >
+                    Marrakech
+                  </text>
+                </g>
+              </svg>
+            </div>
 
-              <g class="checkpoint">
-                <circle cx="250" cy="1900" r="14" fill="#f57c1f" stroke="white" stroke-width="3"/>
-                <text x="250" y="1940" text-anchor="middle" fill="white" font-weight="700" font-size="16">Arrivée</text>
+            <!-- Voiture FIXE au centre -->
+            <svg
+              class="car-fixed"
+              width="70"
+              height="70"
+              viewBox="0 0 70 70"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g>
+                <!-- Corps principal -->
+                <rect
+                  x="17"
+                  y="0"
+                  width="36"
+                  height="70"
+                  rx="4"
+                  fill="#f57c1f"
+                />
+                <!-- Capot -->
+                <rect
+                  x="19"
+                  y="0"
+                  width="32"
+                  height="15"
+                  rx="3"
+                  fill="#f37000"
+                />
+                <!-- Pare-brise -->
+                <rect
+                  x="21"
+                  y="17"
+                  width="28"
+                  height="8"
+                  rx="2"
+                  fill="#87CEEB"
+                  opacity="0.7"
+                />
+                <!-- Habitacle -->
+                <rect
+                  x="20"
+                  y="27"
+                  width="30"
+                  height="24"
+                  rx="2"
+                  fill="#f88b29"
+                />
+                <!-- Pare-brise arrière -->
+                <rect
+                  x="21"
+                  y="53"
+                  width="28"
+                  height="8"
+                  rx="2"
+                  fill="#87CEEB"
+                  opacity="0.7"
+                />
+                <!-- Coffre -->
+                <rect
+                  x="19"
+                  y="63"
+                  width="32"
+                  height="7"
+                  rx="2"
+                  fill="#f37000"
+                />
+                <!-- Roues avant -->
+                <rect x="15" y="7" width="6" height="12" rx="1" fill="#222" />
+                <rect x="49" y="7" width="6" height="12" rx="1" fill="#222" />
+                <!-- Roues arrière -->
+                <rect x="15" y="51" width="6" height="12" rx="1" fill="#222" />
+                <rect x="49" y="51" width="6" height="12" rx="1" fill="#222" />
+                <!-- Phares -->
+                <circle cx="25" y="3" r="3" fill="#FFD700" />
+                <circle cx="45" cy="3" r="3" fill="#FFD700" />
+                <!-- Feux -->
+                <circle cx="25" cy="67" r="2.5" fill="#FF0000" />
+                <circle cx="45" cy="67" r="2.5" fill="#FF0000" />
               </g>
             </svg>
           </div>
-
-          <!-- Voiture FIXE au centre -->
-          <svg class="car-fixed" width="70" height="70" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
-            <g>
-              <!-- Corps principal -->
-              <rect x="17" y="0" width="36" height="70" rx="4" fill="#f57c1f"/>
-              <!-- Capot -->
-              <rect x="19" y="0" width="32" height="15" rx="3" fill="#f37000"/>
-              <!-- Pare-brise -->
-              <rect x="21" y="17" width="28" height="8" rx="2" fill="#87CEEB" opacity="0.7"/>
-              <!-- Habitacle -->
-              <rect x="20" y="27" width="30" height="24" rx="2" fill="#f88b29"/>
-              <!-- Pare-brise arrière -->
-              <rect x="21" y="53" width="28" height="8" rx="2" fill="#87CEEB" opacity="0.7"/>
-              <!-- Coffre -->
-              <rect x="19" y="63" width="32" height="7" rx="2" fill="#f37000"/>
-              <!-- Roues avant -->
-              <rect x="15" y="7" width="6" height="12" rx="1" fill="#222"/>
-              <rect x="49" y="7" width="6" height="12" rx="1" fill="#222"/>
-              <!-- Roues arrière -->
-              <rect x="15" y="51" width="6" height="12" rx="1" fill="#222"/>
-              <rect x="49" y="51" width="6" height="12" rx="1" fill="#222"/>
-              <!-- Phares -->
-              <circle cx="25" y="3" r="3" fill="#FFD700"/>
-              <circle cx="45" cy="3" r="3" fill="#FFD700"/>
-              <!-- Feux -->
-              <circle cx="25" cy="67" r="2.5" fill="#FF0000"/>
-              <circle cx="45" cy="67" r="2.5" fill="#FF0000"/>
-            </g>
-          </svg>
         </div>
       </div>
+    </section>
+
+    <!-- Tooltips (indices aux étapes) -->
+    <div class="game-tooltip left" id="tooltip1">
+      <div class="tooltip-header">
+        <div class="tooltip-icon">🏁</div>
+        <div class="tooltip-badge">Étape 1</div>
+      </div>
+      <h3 class="tooltip-title">Biarritz → Algeciras</h3>
+      <p class="tooltip-text">
+        Village-Départ à Biarritz (18-19 fév). Vérifications techniques et administratives, puis direction Algeciras !
+      </p>
+      <p class="tooltip-tip">
+        💡 10 kg de denrées alimentaires pour la Croix-Rouge
+      </p>
     </div>
-  </section>
 
-  <!-- Tooltips (indices aux étapes) -->
-  <div class="game-tooltip left" id="tooltip1">
-    <div class="tooltip-header">
-      <div class="tooltip-icon">🏁</div>
-      <div class="tooltip-badge">Étape 1</div>
+    <div class="game-tooltip right" id="tooltip2">
+      <div class="tooltip-header">
+        <div class="tooltip-icon">🌊</div>
+        <div class="tooltip-badge">Étape 2</div>
+      </div>
+      <h3 class="tooltip-title">Traversée du détroit</h3>
+      <p class="tooltip-text">
+        Briefing à Algeciras (20-21 fév), puis traversée en ferry du détroit de Gibraltar direction le Maroc !
+      </p>
+      <p class="tooltip-tip">
+        💡 Embarquement 21-22 février
+      </p>
     </div>
-    <h3 class="tooltip-title">Départ → Algésiras</h3>
-    <p class="tooltip-text">C'est parti ! Direction le sud de l'Espagne pour embarquer sur le ferry.</p>
-    <p class="tooltip-tip">💡 Conseil : Vérifier tous les niveaux avant l'embarquement !</p>
-  </div>
 
-  <div class="game-tooltip right" id="tooltip2">
-    <div class="tooltip-header">
-      <div class="tooltip-icon">🌊</div>
-      <div class="tooltip-badge">Étape 2</div>
+    <div class="game-tooltip left" id="tooltip3">
+      <div class="tooltip-header">
+        <div class="tooltip-icon">🏜️</div>
+        <div class="tooltip-badge">Étape 3</div>
+      </div>
+      <h3 class="tooltip-title">Grand Sud marocain</h3>
+      <p class="tooltip-text">
+        6 étapes dans le désert (23-27 fév) ! Navigation au roadbook, ~150 km par jour, pistes sablonneuses et dunes.
+      </p>
+      <p class="tooltip-tip">
+        💡 Maintenance au pôle mécanique si besoin
+      </p>
     </div>
-    <h3 class="tooltip-title">Cap sur Rabat</h3>
-    <p class="tooltip-text">Route côtière marocaine, premiers paysages de dunes et ravitaillement.</p>
-    <p class="tooltip-tip">💡 Conseil : Vérifier la pression des pneus régulièrement !</p>
-  </div>
 
-  <div class="game-tooltip left" id="tooltip3">
-    <div class="tooltip-header">
-      <div class="tooltip-icon">🏜️</div>
-      <div class="tooltip-badge">Étape 3</div>
+    <div class="game-tooltip right" id="tooltip4">
+      <div class="tooltip-header">
+        <div class="tooltip-icon">🎬</div>
+        <div class="tooltip-badge">Arrivée</div>
+      </div>
+      <h3 class="tooltip-title">Arrivée à Marrakech !</h3>
+      <p class="tooltip-text">
+        Arrivée le 27 février ! Repos, remise des prix le 28, puis retour vers l'Europe le 1er mars. Mission accomplie !
+      </p>
+      <p class="tooltip-tip">🎉 Bravo La Jerricane #311 !</p>
     </div>
-    <h3 class="tooltip-title">Les Dunes de Merzouga</h3>
-    <p class="tooltip-text">Le vrai désert ! Navigation aux caps, pistes sablonneuses.</p>
-    <p class="tooltip-tip">💡 Conseil : Dégonfler les pneus pour mieux flotter sur le sable.</p>
-  </div>
 
-  <div class="game-tooltip right" id="tooltip4">
-    <div class="tooltip-header">
-      <div class="tooltip-icon">🎬</div>
-      <div class="tooltip-badge">Arrivée</div>
-    </div>
-    <h3 class="tooltip-title">Arrivée finale !</h3>
-    <p class="tooltip-text">Félicitations ! Vous avez parcouru tout le raid. La 4L a tenu bon jusqu'au bout !</p>
-    <p class="tooltip-tip">🎉 Bravo à toute l'équipe Desert Fox !</p>
-  </div>
+    <footer>
+      <div class="container">© 2026 La Jerricane #311 — 4L Trophy</div>
+    </footer>
 
-  <footer>
-    <div class="container">© 2025 Team Desert Fox — 4L Trophy</div>
-  </footer>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="script.js"></script>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script src="script.js"></script>
+    <script>
+      // Init GSAP
+      gsap.registerPlugin(ScrollTrigger);
 
-  <script>
-    // Init GSAP
-    gsap.registerPlugin(ScrollTrigger);
+      const roadContainer = document.getElementById("roadContainer");
+      const car = document.querySelector(".car-fixed");
+      const path = document.getElementById("roadPath");
 
-    const roadContainer = document.getElementById('roadContainer');
-    const car = document.querySelector('.car-fixed');
-    const path = document.getElementById('roadPath');
-    const trees = document.querySelectorAll('.tree');
+      // Initialiser la position de la voiture au départ du path
+      gsap.set(car, {
+        x: -35, // Centrer horizontalement (-50% de 70px = -35px)
+        y: -35, // Centrer verticalement et remonter pour être sur le point de départ
+        rotation: 90, // Direction vers le bas au départ
+      });
 
-    // Initialiser la position de la voiture au départ du path
-    gsap.set(car, {
-      x: -35, // Centrer horizontalement (-50% de 70px = -35px)
-      y: -35, // Centrer verticalement et remonter pour être sur le point de départ
-      rotation: 90 // Direction vers le bas au départ
-    });
+      // Animer la route qui défile (monte)
+      gsap.to(roadContainer, {
+        y: -1800, // La route monte (ajusté avec la nouvelle position de départ)
+        scrollTrigger: {
+          trigger: ".journey",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: true,
+        },
+        ease: "none",
+      });
 
-    // Faire disparaître la végétation progressivement
-    gsap.to(trees, {
-      opacity: 0,
-      scale: 0.8,
-      scrollTrigger: {
-        trigger: ".journey",
-        start: "top top",
-        end: "30% top",
-        scrub: true
-      },
-      ease: "power2.out"
-    });
-
-    // Animer la route qui défile (monte)
-    gsap.to(roadContainer, {
-      y: -1800, // La route monte (ajusté avec la nouvelle position de départ)
-      scrollTrigger: {
+      // Faire suivre la voiture sur la route (position X + rotation)
+      ScrollTrigger.create({
         trigger: ".journey",
         start: "top top",
         end: "bottom bottom",
-        scrub: true
-      },
-      ease: "none"
-    });
+        scrub: true,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          const pathLength = path.getTotalLength();
 
-    // Faire suivre la voiture sur la route (position X + rotation)
-    ScrollTrigger.create({
-      trigger: ".journey",
-      start: "top top",
-      end: "bottom bottom",
-      scrub: true,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        const pathLength = path.getTotalLength();
+          // Position actuelle sur le path
+          const currentPos = pathLength * progress;
+          const nextPos = Math.min(currentPos + 20, pathLength);
 
-        // Position actuelle sur le path
-        const currentPos = pathLength * progress;
-        const nextPos = Math.min(currentPos + 20, pathLength);
+          const point1 = path.getPointAtLength(currentPos);
+          const point2 = path.getPointAtLength(nextPos);
 
-        const point1 = path.getPointAtLength(currentPos);
-        const point2 = path.getPointAtLength(nextPos);
+          // Calculer l'angle
+          const angle =
+            (Math.atan2(point2.y - point1.y, point2.x - point1.x) * 180) /
+              Math.PI +
+            90;
 
-        // Calculer l'angle
-        const angle = Math.atan2(point2.y - point1.y, point2.x - point1.x) * 180 / Math.PI + 90;
+          // Position de la voiture - ajustement pour que la voiture soit exactement sur la route
+          // Position X relative au centre du SVG (250) avec offset pour centrer la voiture
+          const carX = point1.x - 250 - 35;
 
-        // Position de la voiture - ajustement pour que la voiture soit exactement sur la route
-        // Position X relative au centre du SVG (250) avec offset pour centrer la voiture
-        const carX = point1.x - 250 - 35;
+          // Appliquer position et rotation à la voiture
+          gsap.set(car, {
+            x: carX,
+            y: -35, // Garder la même position Y que l'initialisation
+            rotation: angle,
+          });
+        },
+      });
 
-        // Appliquer position et rotation à la voiture
-        gsap.set(car, {
-          x: carX,
-          y: -35, // Garder la même position Y que l'initialisation
-          rotation: angle
-        });
-      }
-    });
+      // Gérer l'affichage des tooltips aux positions exactes des checkpoints
+      // Trouver le progress exact pour chaque checkpoint Y
+      const pathLength = path.getTotalLength();
+      const checkpointYPositions = [100, 400, 700, 1000, 1900]; // Y des checkpoints
+      const tooltipIds = ["tooltip1", "tooltip2", "tooltip3", "tooltip4"];
 
-    // Gérer l'affichage des tooltips aux positions exactes des checkpoints
-    // Trouver le progress exact pour chaque checkpoint Y
-    const pathLength = path.getTotalLength();
-    const checkpointYPositions = [100, 400, 700, 1000, 1900]; // Y des checkpoints
-    const tooltipIds = ['tooltip1', 'tooltip2', 'tooltip3', 'tooltip4'];
+      // Calculer les progress pour chaque checkpoint
+      const checkpointProgresses = checkpointYPositions.map((targetY) => {
+        // Chercher le point sur le path qui correspond à ce Y
+        let closestProgress = 0;
+        let minDiff = Infinity;
 
-    // Calculer les progress pour chaque checkpoint
-    const checkpointProgresses = checkpointYPositions.map(targetY => {
-      // Chercher le point sur le path qui correspond à ce Y
-      let closestProgress = 0;
-      let minDiff = Infinity;
+        for (let i = 0; i <= 100; i++) {
+          const testProgress = i / 100;
+          const testPos = testProgress * pathLength;
+          const point = path.getPointAtLength(testPos);
+          const diff = Math.abs(point.y - targetY);
 
-      for (let i = 0; i <= 100; i++) {
-        const testProgress = i / 100;
-        const testPos = testProgress * pathLength;
-        const point = path.getPointAtLength(testPos);
-        const diff = Math.abs(point.y - targetY);
-
-        if (diff < minDiff) {
-          minDiff = diff;
-          closestProgress = testProgress;
-        }
-      }
-      return closestProgress;
-    });
-
-    // Créer les checkpoints avec une plage étroite autour de chaque position
-    const checkpoints = [
-      { id: 'tooltip1', center: checkpointProgresses[0], range: 0.08 },  // Départ
-      { id: 'tooltip2', center: checkpointProgresses[1], range: 0.08 },  // Algésiras
-      { id: 'tooltip3', center: checkpointProgresses[2], range: 0.08 },  // Rabat
-      { id: 'tooltip4', center: checkpointProgresses[3], range: 0.12 }   // Merzouga → Arrivée
-    ];
-
-    ScrollTrigger.create({
-      trigger: ".journey",
-      start: "top top",
-      end: "bottom bottom",
-      onUpdate: (self) => {
-        const progress = self.progress;
-
-        checkpoints.forEach(checkpoint => {
-          const el = document.getElementById(checkpoint.id);
-          const start = checkpoint.center - checkpoint.range / 2;
-          const end = checkpoint.center + checkpoint.range / 2;
-
-          if (progress >= start && progress <= end) {
-            el.classList.add('show');
-          } else {
-            el.classList.remove('show');
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestProgress = testProgress;
           }
-        });
-      }
-    });
-  </script>
-</body>
+        }
+        return closestProgress;
+      });
+
+      // Créer les checkpoints avec une plage étroite autour de chaque position
+      const checkpoints = [
+        { id: "tooltip1", center: checkpointProgresses[0], range: 0.08 }, // Départ
+        { id: "tooltip2", center: checkpointProgresses[1], range: 0.08 }, // Algésiras
+        { id: "tooltip3", center: checkpointProgresses[2], range: 0.08 }, // Rabat
+        { id: "tooltip4", center: checkpointProgresses[3], range: 0.12 }, // Merzouga → Arrivée
+      ];
+
+      ScrollTrigger.create({
+        trigger: ".journey",
+        start: "top top",
+        end: "bottom bottom",
+        onUpdate: (self) => {
+          const progress = self.progress;
+
+          checkpoints.forEach((checkpoint) => {
+            const el = document.getElementById(checkpoint.id);
+            const start = checkpoint.center - checkpoint.range / 2;
+            const end = checkpoint.center + checkpoint.range / 2;
+
+            if (progress >= start && progress <= end) {
+              el.classList.add("show");
+            } else {
+              el.classList.remove("show");
+            }
+          });
+        },
+      });
+    </script>
+  </body>
 </html>
