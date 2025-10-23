@@ -29,32 +29,129 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 3500px;
+        height: 100%;
+        min-height: 2600px;
         background: linear-gradient(
           180deg,
           #7fb069 0%,
-          #7fb069 25%,
-          #8fb973 35%,
-          #b5d99c 45%,
-          #d4e5b8 55%,
-          #f2d2a2 65%,
-          #f8a94a 75%,
-          #f88b29 85%,
-          #e67a20 92%,
+          #7fb069 15%,
+          #8fb973 22%,
+          #b5d99c 30%,
+          #d4e5b8 38%,
+          #f2d2a2 48%,
+          #f8a94a 58%,
+          #f88b29 68%,
+          #e67a20 80%,
+          #d4691e 88%,
           #0b1e2d 100%
         );
         z-index: -2;
+      }
+
+      /* Hero d'introduction aligné aux autres pages */
+      .page-hero {
+        background: linear-gradient(
+          135deg,
+          #0b1e2d 0%,
+          #1a3a52 50%,
+          #f88b29 100%
+        );
+        padding: 6rem 0 4rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        color: white;
+        z-index: 4;
+      }
+
+      .page-hero::before {
+        content: "";
+        position: absolute;
+        inset: auto 0 0 0;
+        height: 90px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(11, 30, 45, 0.15)
+        );
+      }
+
+      .hero-badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.18);
+        border: 2px solid rgba(255, 255, 255, 0.35);
+        backdrop-filter: blur(10px);
+        padding: 0.5rem 1.4rem;
+        border-radius: 999px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-bottom: 1.2rem;
+        font-size: 0.85rem;
+        color: white;
+      }
+
+      .page-hero h1 {
+        font-family: "Archivo", sans-serif;
+        font-size: clamp(2.2rem, 6.2vw, 3.6rem);
+        font-weight: 900;
+        margin: 0 0 0.9rem;
+        line-height: 1.05;
+      }
+
+      .page-hero p {
+        font-size: clamp(1rem, 2.2vw, 1.2rem);
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .itinerary-experience {
+        padding: 4vh 0 0;
+        background: linear-gradient(
+          180deg,
+          rgba(11, 30, 45, 0) 0%,
+          rgba(212, 105, 30, 0.85) 70%,
+          #d4691e 100%
+        );
+        position: relative;
+        z-index: 1;
+        margin-top: 0;
+      }
+
+      .itinerary-experience::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 120px;
+        background: linear-gradient(
+          to bottom,
+          rgba(11, 30, 45, 0.12),
+          rgba(11, 30, 45, 0)
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .itinerary-page footer {
+        color: #fff;
+        padding: 4vh 0;
+        text-align: center;
+        background: linear-gradient(180deg, #d4691e 0%, #0b1e2d 65%, #000000 100%);
       }
 
       /* Éléments de végétation - font partie du fond scrollable */
       .vegetation {
         position: absolute;
         width: 100%;
-        height: 3500px;
+        height: 100%;
+        min-height: 1900px;
+        top: 0;
         pointer-events: none;
         z-index: -1;
-        top: 0;
         left: 0;
+        overflow: hidden;
       }
 
       .tree {
@@ -63,96 +160,96 @@
         transition: opacity 0.3s ease;
       }
 
-      /* Arbres du haut - France/Espagne (vert) - positions aléatoires */
+      /* Arbres du haut - Ardèche/France/Espagne (vert) - positions aléatoires */
       .tree-left-1 {
         left: 2%;
-        top: 320px;
+        top: 300px;
         font-size: 3.5rem;
       }
       .tree-left-2 {
         left: 18%;
-        top: 450px;
+        top: 400px;
         font-size: 3rem;
       }
       .tree-left-3 {
         left: 8%;
-        top: 580px;
+        top: 500px;
         font-size: 3.2rem;
       }
       .tree-left-4 {
         left: 25%;
-        top: 710px;
+        top: 600px;
         font-size: 2.8rem;
       }
       .tree-left-5 {
         left: 5%;
-        top: 840px;
+        top: 700px;
         font-size: 3.3rem;
       }
       .tree-left-6 {
         left: 22%;
-        top: 970px;
+        top: 800px;
         font-size: 2.5rem;
       }
       .tree-left-7 {
         left: 12%;
-        top: 1100px;
+        top: 900px;
         font-size: 3.1rem;
       }
       .tree-left-8 {
         left: 3%;
-        top: 1230px;
+        top: 1000px;
         font-size: 2.9rem;
       }
       .tree-left-9 {
         left: 28%;
-        top: 1360px;
+        top: 1100px;
         font-size: 3.4rem;
       }
 
       .tree-right-1 {
         right: 4%;
-        top: 380px;
+        top: 350px;
         font-size: 3rem;
       }
       .tree-right-2 {
         right: 20%;
-        top: 510px;
+        top: 450px;
         font-size: 3.4rem;
       }
       .tree-right-3 {
         right: 10%;
-        top: 640px;
+        top: 550px;
         font-size: 2.9rem;
       }
       .tree-right-4 {
         right: 27%;
-        top: 770px;
+        top: 650px;
         font-size: 3.1rem;
       }
       .tree-right-5 {
         right: 7%;
-        top: 900px;
+        top: 750px;
         font-size: 2.7rem;
       }
       .tree-right-6 {
         right: 23%;
-        top: 1030px;
+        top: 850px;
         font-size: 3rem;
       }
       .tree-right-7 {
         right: 15%;
-        top: 1160px;
+        top: 950px;
         font-size: 3.3rem;
       }
       .tree-right-8 {
         right: 5%;
-        top: 1290px;
+        top: 1050px;
         font-size: 2.8rem;
       }
       .tree-right-9 {
         right: 29%;
-        top: 1420px;
+        top: 1150px;
         font-size: 3.2rem;
       }
 
@@ -165,27 +262,27 @@
 
       .palm-left-1 {
         left: 14%;
-        top: 1500px;
+        top: 1200px;
       }
       .palm-left-2 {
         left: 6%;
-        top: 1680px;
+        top: 1350px;
       }
       .palm-left-3 {
         left: 24%;
-        top: 1860px;
+        top: 1500px;
       }
       .palm-right-1 {
         right: 11%;
-        top: 1560px;
+        top: 1250px;
       }
       .palm-right-2 {
         right: 26%;
-        top: 1740px;
+        top: 1400px;
       }
       .palm-right-3 {
         right: 8%;
-        top: 1920px;
+        top: 1550px;
       }
 
       /* Éléments du désert Saharien */
@@ -197,159 +294,151 @@
       /* Rochers */
       .rock-left-1 {
         left: 3%;
-        top: 2050px;
+        top: 1480px;
         font-size: 2.5rem;
       }
       .rock-left-2 {
         left: 19%;
-        top: 2250px;
+        top: 1560px;
         font-size: 2.8rem;
       }
       .rock-left-3 {
         left: 9%;
-        top: 2450px;
+        top: 1640px;
         font-size: 2.2rem;
       }
       .rock-left-4 {
         left: 27%;
-        top: 2650px;
+        top: 1710px;
         font-size: 3rem;
       }
       .rock-left-5 {
         left: 6%;
-        top: 2850px;
+        top: 1770px;
         font-size: 2.6rem;
       }
       .rock-left-6 {
         left: 22%;
-        top: 3050px;
+        top: 1820px;
         font-size: 2.4rem;
       }
       .rock-left-7 {
         left: 13%;
-        top: 3250px;
+        top: 1860px;
         font-size: 2.7rem;
       }
 
       .rock-right-1 {
         right: 5%;
-        top: 2120px;
+        top: 1500px;
         font-size: 2.6rem;
       }
       .rock-right-2 {
         right: 21%;
-        top: 2320px;
+        top: 1580px;
         font-size: 2.4rem;
       }
       .rock-right-3 {
         right: 12%;
-        top: 2520px;
+        top: 1660px;
         font-size: 2.9rem;
       }
       .rock-right-4 {
         right: 28%;
-        top: 2720px;
+        top: 1730px;
         font-size: 2.3rem;
       }
       .rock-right-5 {
         right: 8%;
-        top: 2920px;
+        top: 1790px;
         font-size: 2.8rem;
       }
       .rock-right-6 {
         right: 24%;
-        top: 3120px;
+        top: 1840px;
         font-size: 2.5rem;
       }
       .rock-right-7 {
         right: 16%;
-        top: 3320px;
+        top: 1875px;
         font-size: 2.7rem;
       }
 
       /* Buissons secs */
       .bush-left-1 {
         left: 17%;
-        top: 2180px;
+        top: 1505px;
         font-size: 2rem;
       }
       .bush-left-2 {
         left: 4%;
-        top: 2380px;
+        top: 1565px;
         font-size: 1.8rem;
       }
       .bush-left-3 {
         left: 29%;
-        top: 2580px;
+        top: 1635px;
         font-size: 2.2rem;
       }
       .bush-left-4 {
         left: 11%;
-        top: 2780px;
+        top: 1705px;
         font-size: 1.9rem;
       }
       .bush-left-5 {
         left: 25%;
-        top: 2980px;
+        top: 1780px;
         font-size: 2.1rem;
       }
 
       .bush-right-1 {
         right: 18%;
-        top: 2210px;
+        top: 1525px;
         font-size: 2rem;
       }
       .bush-right-2 {
         right: 6%;
-        top: 2410px;
+        top: 1585px;
         font-size: 1.8rem;
       }
       .bush-right-3 {
         right: 30%;
-        top: 2610px;
+        top: 1655px;
         font-size: 2.2rem;
       }
       .bush-right-4 {
         right: 13%;
-        top: 2810px;
+        top: 1725px;
         font-size: 1.9rem;
       }
       .bush-right-5 {
         right: 26%;
-        top: 3010px;
+        top: 1795px;
         font-size: 2.1rem;
       }
 
       /* Conteneur de scroll */
       .journey {
         position: relative;
-        min-height: 3000px;
+        margin-top: 8vh;
+        padding-bottom: 14vh;
       }
 
-      /* Scène fixe au centre */
+      /* Scène principale */
       .road-scene {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90vw;
-        max-width: 600px;
-        height: 80vh;
-        max-height: 700px;
-        overflow: hidden;
+        position: relative;
+        width: min(600px, 92vw);
+        margin: 0 auto;
+        padding: 0 0 3.5rem;
         background: transparent;
         z-index: 1;
+        overflow: visible;
       }
 
-      /* Container de la route qui défile */
+      /* Container de la route */
       .road-container {
-        position: absolute;
-        width: 500px;
-        left: 50%;
-        transform: translateX(-50%);
-        will-change: transform;
-        top: 50%;
-        margin-top: -100px; /* Ajuste pour que le départ soit au milieu */
+        position: relative;
+        width: 100%;
       }
 
       /* SVG de la route */
@@ -359,13 +448,19 @@
         display: block;
       }
 
-      /* Voiture FIXE au centre */
+      /* 4L animée - commence attachée au point, puis fixée au centre */
       .car-fixed {
         position: absolute;
-        top: 50%;
-        left: 50%;
+        top: 0;
+        left: 0;
+        width: 70px;
+        height: 70px;
+        margin-left: -35px;
+        margin-top: -35px;
         z-index: 100;
         filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+        pointer-events: none;
+        transform-origin: 50% 50%;
       }
 
       /* Points d'étape */
@@ -380,6 +475,52 @@
         }
         50% {
           opacity: 0.7;
+        }
+      }
+
+      .checkpoint-dot {
+        stroke: white;
+        stroke-width: 4;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.45));
+      }
+
+      .checkpoint-ring {
+        fill: none;
+        stroke-width: 6;
+        opacity: 0.55;
+        transform-origin: center;
+        transform-box: fill-box;
+        animation: beacon 2.6s ease-out infinite;
+      }
+
+      .checkpoint-start .checkpoint-dot {
+        fill: #f57c1f;
+      }
+
+      .checkpoint-finish .checkpoint-dot {
+        fill: #e67a20;
+      }
+
+      .checkpoint-start .checkpoint-ring {
+        stroke: rgba(245, 124, 31, 0.65);
+      }
+
+      .checkpoint-finish .checkpoint-ring {
+        stroke: rgba(230, 122, 32, 0.7);
+      }
+
+      @keyframes beacon {
+        0% {
+          opacity: 0.6;
+          transform: scale(0.75);
+        }
+        60% {
+          opacity: 0.15;
+          transform: scale(1.35);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(1.55);
         }
       }
 
@@ -487,7 +628,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="itinerary-page">
     <!-- NAVIGATION -->
     <nav>
       <div class="container">
@@ -502,6 +643,17 @@
         </ul>
       </div>
     </nav>
+
+    <!-- HERO -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="hero-badge" data-aos="fade-down">Itinéraire 2026</div>
+        <h1 data-aos="fade-up">Cap sur le désert en six étapes clés</h1>
+        <p data-aos="fade-up" data-aos-delay="100">
+          Du village-départ de Biarritz aux dunes marocaines, suivez notre 4L et découvrez les checkpoints en faisant simplement défiler la page.
+        </p>
+      </div>
+    </section>
 
     <!-- Végétation intégrée au fond -->
     <div class="vegetation" id="vegetation">
@@ -571,20 +723,8 @@
     </div>
 
     <!-- ITINÉRAIRE -->
-    <section
-      style="
-        padding: 4vh 0;
-        background: transparent;
-        position: relative;
-        z-index: 1;
-      "
-    >
+    <section class="itinerary-experience">
       <div class="container" style="position: relative; z-index: 2">
-        <h2 data-aos="fade-right">Notre Itinéraire</h2>
-        <p data-aos="fade-right">
-          Scrollez pour voir la route défiler sous la 4L !
-        </p>
-
         <!-- Zone de scroll -->
         <div class="journey">
           <!-- Scène fixe -->
@@ -593,7 +733,7 @@
             <div class="road-container" id="roadContainer">
               <svg
                 class="road-svg"
-                viewBox="0 0 500 2000"
+                viewBox="0 0 500 1850"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <defs>
@@ -606,10 +746,14 @@
                   >
                     <stop
                       offset="0%"
-                      style="stop-color: #0b1e2d; stop-opacity: 1"
+                      style="stop-color: #7fb069; stop-opacity: 1"
                     />
                     <stop
-                      offset="30%"
+                      offset="15%"
+                      style="stop-color: #7fb069; stop-opacity: 1"
+                    />
+                    <stop
+                      offset="35%"
                       style="stop-color: #f88b29; stop-opacity: 1"
                     />
                     <stop
@@ -631,10 +775,10 @@
                   </filter>
                 </defs>
 
-                <!-- Route en S (départ en haut, arrivée en bas) -->
+                <!-- Route en S fluide et sinueuse (départ Ardèche en haut, arrivée Marrakech en bas) -->
                 <path
                   id="roadPath"
-                  d="M250,100 C250,200 330,300 350,400 C370,500 370,600 250,700 C130,800 130,900 150,1000 C170,1100 250,1200 250,1300 C250,1400 330,1500 350,1600 C370,1700 250,1800 250,1900"
+                  d="M250,200 C200,280 150,360 240,440 S360,560 340,660 S260,780 320,880 S420,1000 300,1140 S140,1280 220,1420 S360,1600 290,1660 S230,1740 250,1700"
                   stroke="url(#roadGrad)"
                   stroke-width="40"
                   stroke-linecap="round"
@@ -643,7 +787,7 @@
 
                 <!-- Ligne centrale -->
                 <path
-                  d="M250,100 C250,200 330,300 350,400 C370,500 370,600 250,700 C130,800 130,900 150,1000 C170,1100 250,1200 250,1300 C250,1400 330,1500 350,1600 C370,1700 250,1800 250,1900"
+                  d="M250,200 C200,280 150,360 240,440 S360,560 340,660 S260,780 320,880 S420,1000 300,1140 S140,1280 220,1420 S360,1600 290,1660 S230,1740 250,1700"
                   stroke="white"
                   stroke-width="3"
                   stroke-linecap="round"
@@ -653,19 +797,47 @@
                 />
 
                 <!-- Points d'étape -->
+                <!-- Ardèche - Point de départ -->
                 <g class="checkpoint">
                   <circle
                     cx="250"
-                    cy="100"
+                    cy="200"
                     r="14"
-                    fill="#f57c1f"
+                    fill="#7fb069"
                     stroke="white"
                     stroke-width="3"
                   />
                   <text
                     x="250"
-                    y="80"
+                    y="160"
                     text-anchor="middle"
+                    fill="white"
+                    font-weight="700"
+                    font-size="16"
+                  >
+                    Ardèche
+                  </text>
+                </g>
+
+                <!-- Biarritz - Village Départ -->
+                <g class="checkpoint checkpoint-start">
+                  <circle
+                    class="checkpoint-ring"
+                    cx="240"
+                    cy="440"
+                    r="24"
+                  />
+                  <circle
+                    class="checkpoint-dot"
+                    cx="240"
+                    cy="440"
+                    r="14"
+                    fill="#f57c1f"
+                  />
+                  <text
+                    x="280"
+                    y="445"
+                    text-anchor="start"
                     fill="white"
                     font-weight="700"
                     font-size="16"
@@ -674,18 +846,19 @@
                   </text>
                 </g>
 
+                <!-- Algeciras -->
                 <g class="checkpoint">
                   <circle
-                    cx="350"
-                    cy="400"
+                    cx="340"
+                    cy="660"
                     r="14"
                     fill="#f57c1f"
                     stroke="white"
                     stroke-width="3"
                   />
                   <text
-                    x="390"
-                    y="405"
+                    x="380"
+                    y="665"
                     text-anchor="start"
                     fill="white"
                     font-weight="700"
@@ -695,39 +868,19 @@
                   </text>
                 </g>
 
+                <!-- Grand Sud -->
                 <g class="checkpoint">
                   <circle
-                    cx="250"
-                    cy="700"
+                    cx="320"
+                    cy="880"
                     r="14"
                     fill="#f57c1f"
                     stroke="white"
                     stroke-width="3"
                   />
                   <text
-                    x="210"
-                    y="705"
-                    text-anchor="end"
-                    fill="white"
-                    font-weight="700"
-                    font-size="16"
-                  >
-                    Gibraltar
-                  </text>
-                </g>
-
-                <g class="checkpoint">
-                  <circle
-                    cx="150"
-                    cy="1000"
-                    r="14"
-                    fill="#f57c1f"
-                    stroke="white"
-                    stroke-width="3"
-                  />
-                  <text
-                    x="110"
-                    y="1005"
+                    x="280"
+                    y="885"
                     text-anchor="end"
                     fill="white"
                     font-weight="700"
@@ -737,18 +890,46 @@
                   </text>
                 </g>
 
+                <!-- Merzouga -->
                 <g class="checkpoint">
                   <circle
-                    cx="250"
-                    cy="1900"
+                    cx="300"
+                    cy="1140"
                     r="14"
                     fill="#f57c1f"
                     stroke="white"
                     stroke-width="3"
                   />
                   <text
+                    x="260"
+                    y="1145"
+                    text-anchor="end"
+                    fill="white"
+                    font-weight="700"
+                    font-size="16"
+                  >
+                    Merzouga
+                  </text>
+                </g>
+
+                <!-- Marrakech - Arrivée -->
+                <g class="checkpoint checkpoint-finish">
+                  <circle
+                    class="checkpoint-ring"
+                    cx="250"
+                    cy="1700"
+                    r="26"
+                  />
+                  <circle
+                    class="checkpoint-dot"
+                    cx="250"
+                    cy="1700"
+                    r="14"
+                    fill="#e67a20"
+                  />
+                  <text
                     x="250"
-                    y="1940"
+                    y="1740"
                     text-anchor="middle"
                     fill="white"
                     font-weight="700"
@@ -758,17 +939,15 @@
                   </text>
                 </g>
               </svg>
-            </div>
-
-            <!-- Voiture FIXE au centre -->
-            <svg
-              class="car-fixed"
-              width="70"
-              height="70"
-              viewBox="0 0 70 70"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g>
+              <!-- 4L -->
+              <svg
+                class="car-fixed"
+                width="70"
+                height="70"
+                viewBox="0 0 70 70"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g>
                 <!-- Corps principal -->
                 <rect
                   x="17"
@@ -838,65 +1017,100 @@
                 <circle cx="25" cy="67" r="2.5" fill="#FF0000" />
                 <circle cx="45" cy="67" r="2.5" fill="#FF0000" />
               </g>
-            </svg>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Tooltips (indices aux étapes) -->
-    <div class="game-tooltip left" id="tooltip1">
+    <!-- Ardèche - Départ -->
+    <div class="game-tooltip left" id="tooltip0">
+      <div class="tooltip-header">
+        <div class="tooltip-icon">🏠</div>
+        <div class="tooltip-badge">Départ</div>
+      </div>
+      <h3 class="tooltip-title">C'est parti de l'Ardèche !</h3>
+      <p class="tooltip-text">
+        L'aventure commence chez nous en Ardèche. Préparation de la 4L, derniers réglages, et c'est parti pour Biarritz !
+      </p>
+      <p class="tooltip-tip">
+        💡 Tous les équipages partent de chez eux vers le Village-Départ
+      </p>
+    </div>
+
+    <!-- Ardèche → Biarritz -->
+    <div class="game-tooltip right" id="tooltip1">
       <div class="tooltip-header">
         <div class="tooltip-icon">🏁</div>
+        <div class="tooltip-badge">Village-Départ</div>
+      </div>
+      <h3 class="tooltip-title">Village-départ de Biarritz</h3>
+      <p class="tooltip-text">
+        Toute la caravane se réunit à Biarritz (18-19 fév). Vérifs techniques, contrôle corrosion et briefing final avant que le drapeau à damier ne donne le coup d'envoi officiel !
+      </p>
+      <p class="tooltip-tip">
+        🚦 Top départ du 4L Trophy 2026 après remise des 10 kg de denrées à la Croix-Rouge
+      </p>
+    </div>
+
+    <!-- Biarritz → Algeciras -->
+    <div class="game-tooltip left" id="tooltip2">
+      <div class="tooltip-header">
+        <div class="tooltip-icon">🚢</div>
         <div class="tooltip-badge">Étape 1</div>
       </div>
-      <h3 class="tooltip-title">Biarritz → Algeciras</h3>
+      <h3 class="tooltip-title">Traversée vers Algeciras</h3>
       <p class="tooltip-text">
-        Village-Départ à Biarritz (18-19 fév). Vérifications techniques et administratives, puis direction Algeciras !
+        Après les vérifs, liaison libre vers Algeciras (20-21 fév). Embarquement de la 4L sur le ferry et traversée du détroit pour rejoindre le Maroc !
       </p>
       <p class="tooltip-tip">
-        💡 10 kg de denrées alimentaires pour la Croix-Rouge
+        💡 Dernière étape sur le continent avant le sable marocain
       </p>
     </div>
 
-    <div class="game-tooltip right" id="tooltip2">
+    <!-- Algeciras → Grand Sud -->
+    <div class="game-tooltip right" id="tooltip3">
       <div class="tooltip-header">
-        <div class="tooltip-icon">🌊</div>
+        <div class="tooltip-icon">🧭</div>
         <div class="tooltip-badge">Étape 2</div>
-      </div>
-      <h3 class="tooltip-title">Traversée du détroit</h3>
-      <p class="tooltip-text">
-        Briefing à Algeciras (20-21 fév), puis traversée en ferry du détroit de Gibraltar direction le Maroc !
-      </p>
-      <p class="tooltip-tip">
-        💡 Embarquement 21-22 février
-      </p>
-    </div>
-
-    <div class="game-tooltip left" id="tooltip3">
-      <div class="tooltip-header">
-        <div class="tooltip-icon">🏜️</div>
-        <div class="tooltip-badge">Étape 3</div>
       </div>
       <h3 class="tooltip-title">Grand Sud marocain</h3>
       <p class="tooltip-text">
-        6 étapes dans le désert (23-27 fév) ! Navigation au roadbook, ~150 km par jour, pistes sablonneuses et dunes.
+        Liaison jusqu'au Grand Sud (21-22 fév). Premiers bivouacs marocains, briefing sécurité et distribution des roadbooks avant les spéciales.
+      </p>
+      <p class="tooltip-tip">
+        💡 Découverte des pistes roulantes et des premiers oueds
+      </p>
+    </div>
+
+    <!-- Grand Sud → Merzouga -->
+    <div class="game-tooltip left" id="tooltip4">
+      <div class="tooltip-header">
+        <div class="tooltip-icon">🐪</div>
+        <div class="tooltip-badge">Étape 3-6</div>
+      </div>
+      <h3 class="tooltip-title">Dunes de Merzouga</h3>
+      <p class="tooltip-text">
+        6 étapes dans le désert (23-27 fév) ! Navigation au roadbook et à la boussole, ~150 km par jour, pistes sablonneuses et dunes du Sahara.
       </p>
       <p class="tooltip-tip">
         💡 Maintenance au pôle mécanique si besoin
       </p>
     </div>
 
-    <div class="game-tooltip right" id="tooltip4">
+    <!-- Merzouga → Marrakech -->
+    <div class="game-tooltip right" id="tooltip5">
       <div class="tooltip-header">
-        <div class="tooltip-icon">🎬</div>
+        <div class="tooltip-icon">🏆</div>
         <div class="tooltip-badge">Arrivée</div>
       </div>
       <h3 class="tooltip-title">Arrivée à Marrakech !</h3>
       <p class="tooltip-text">
-        Arrivée le 27 février ! Repos, remise des prix le 28, puis retour vers l'Europe le 1er mars. Mission accomplie !
+        Arrivée officielle à Marrakech le 27 février ! Drapeau final, podium, remise des prix le 28 puis convoi retour vers l'Europe le 1er mars. Mission accomplie !
       </p>
-      <p class="tooltip-tip">🎉 Bravo La Jerricane #311 !</p>
+      <p class="tooltip-tip">🎉 Bravo La Jerricane #311, finishers du 4L Trophy !</p>
     </div>
 
     <footer>
@@ -914,116 +1128,234 @@
       gsap.registerPlugin(ScrollTrigger);
 
       const roadContainer = document.getElementById("roadContainer");
-      const car = document.querySelector(".car-fixed");
+      const roadSvg = roadContainer.querySelector(".road-svg");
+      const car = roadContainer.querySelector(".car-fixed");
       const path = document.getElementById("roadPath");
+      const viewBox = roadSvg.viewBox.baseVal;
+      const carSize = 70;
+      const pathLength = path.getTotalLength();
+      const marrakechY = 1700;
+      const finalPoint = path.getPointAtLength(pathLength);
+      const finalReferencePoint = path.getPointAtLength(Math.max(pathLength - 20, 0));
+      const finalAngle =
+        (Math.atan2(
+          finalPoint.y - finalReferencePoint.y,
+          finalPoint.x - finalReferencePoint.x
+        ) * 180) /
+          Math.PI +
+        90;
 
-      // Initialiser la position de la voiture au départ du path
-      gsap.set(car, {
-        x: -35, // Centrer horizontalement (-50% de 70px = -35px)
-        y: -35, // Centrer verticalement et remonter pour être sur le point de départ
-        rotation: 90, // Direction vers le bas au départ
-      });
+      // Trouve rapidement sur le path le point dont l'ordonnée est la plus proche du Y visé
+      const findPointAtY = (targetY) => {
+        let start = 0;
+        let end = pathLength;
+        let closestLength = 0;
+        let closestPoint = path.getPointAtLength(0);
+        let minDiff = Math.abs(closestPoint.y - targetY);
 
-      // Animer la route qui défile (monte)
-      gsap.to(roadContainer, {
-        y: -1800, // La route monte (ajusté avec la nouvelle position de départ)
-        scrollTrigger: {
-          trigger: ".journey",
-          start: "top top",
-          end: "bottom bottom",
-          scrub: true,
-        },
-        ease: "none",
-      });
+        // Recherche dichotomique : le Y du path augmente avec la longueur parcourue
+        for (let i = 0; i < 25; i += 1) {
+          const middle = (start + end) / 2;
+          const point = path.getPointAtLength(middle);
+          const diff = point.y - targetY;
+          const absDiff = Math.abs(diff);
 
-      // Faire suivre la voiture sur la route (position X + rotation)
-      ScrollTrigger.create({
-        trigger: ".journey",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          const pathLength = path.getTotalLength();
+          if (absDiff < minDiff) {
+            minDiff = absDiff;
+            closestPoint = point;
+            closestLength = middle;
+          }
 
-          // Position actuelle sur le path
-          const currentPos = pathLength * progress;
-          const nextPos = Math.min(currentPos + 20, pathLength);
+          if (absDiff <= 0.5) {
+            break;
+          }
 
-          const point1 = path.getPointAtLength(currentPos);
-          const point2 = path.getPointAtLength(nextPos);
+          if (diff < 0) {
+            start = middle;
+          } else {
+            end = middle;
+          }
+        }
 
-          // Calculer l'angle
+        return { point: closestPoint, length: closestLength };
+      };
+
+      const updateCarPosition = (progress) => {
+        // Calculer les échelles pour convertir les coordonnées SVG en pixels
+        const scaleX = roadSvg.clientWidth / viewBox.width;
+        const scaleY = roadSvg.clientHeight / viewBox.height;
+
+        // Obtenir la position de la route sur la page
+        const roadRect = roadSvg.getBoundingClientRect();
+
+        // Points clés en Y (dans le SVG)
+        const ardecheY = 200;
+        const ardecheScreenY = roadRect.top + (ardecheY * scaleY);
+        const marrakechScreenY = roadRect.top + (marrakechY * scaleY);
+        const screenCenterY = window.innerHeight / 2;
+
+        // Vérifier si le point Ardèche est passé au milieu de l'écran
+        const ardechePassedCenter = ardecheScreenY < screenCenterY;
+
+        if (!ardechePassedCenter) {
+          // Avant que Ardèche arrive au milieu : la voiture reste sur le point Ardèche
+          const ardecheX = 250 * scaleX;
+          const ardecheYLocal = ardecheY * scaleY;
+
+          gsap.set(car, {
+            position: 'absolute',
+            left: ardecheX + 'px',
+            top: ardecheYLocal + 'px',
+            rotation: 0,
+            transformOrigin: "50% 50%",
+          });
+        } else {
+          // Si Marrakech est déjà passée sous le centre, la voiture reste posée sur le point d'arrivée
+          if (marrakechScreenY <= screenCenterY) {
+            gsap.set(car, {
+              position: 'absolute',
+              left: finalPoint.x * scaleX + 'px',
+              top: finalPoint.y * scaleY + 'px',
+              rotation: finalAngle,
+              transformOrigin: "50% 50%",
+            });
+            return;
+          }
+
+          // La voiture suit la route : on cherche quel point du path correspond au centre de l'écran
+          // Le Y du centre de l'écran dans le référentiel du SVG
+          const centerYInSVG = (screenCenterY - roadRect.top) / scaleY;
+
+          // Trouver le point sur le path qui correspond à ce Y
+          const { point: point1, length: currentLength } = findPointAtY(centerYInSVG);
+          const point2 = path.getPointAtLength(Math.min(currentLength + 20, pathLength));
+
+          // Calculer l'angle de rotation de la voiture
           const angle =
             (Math.atan2(point2.y - point1.y, point2.x - point1.x) * 180) /
               Math.PI +
             90;
 
-          // Position de la voiture - ajustement pour que la voiture soit exactement sur la route
-          // Position X relative au centre du SVG (250) avec offset pour centrer la voiture
-          const carX = point1.x - 250 - 35;
+          // Positionner la voiture au centre, suivant le X de la route
+          const carX = roadRect.left + (point1.x * scaleX);
 
-          // Appliquer position et rotation à la voiture
+          // Positionnement instantané (pas d'animation GSAP pour éviter les saccades)
           gsap.set(car, {
-            x: carX,
-            y: -35, // Garder la même position Y que l'initialisation
+            position: 'fixed',
+            left: carX + 'px',
+            top: '50%',
             rotation: angle,
+            transformOrigin: "50% 50%",
           });
+        }
+      };
+
+      let latestProgress = 0;
+      let frameScheduled = false;
+      const scheduleCarUpdate = (progress) => {
+        latestProgress = progress;
+
+        if (frameScheduled) return;
+
+        frameScheduled = true;
+        requestAnimationFrame(() => {
+          frameScheduled = false;
+          updateCarPosition(latestProgress);
+        });
+      };
+
+      // Positionner la voiture au chargement
+      updateCarPosition(0);
+
+      const carMotion = ScrollTrigger.create({
+        trigger: ".journey",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+        onUpdate: (self) => {
+          scheduleCarUpdate(self.progress);
         },
       });
 
-      // Gérer l'affichage des tooltips aux positions exactes des checkpoints
-      // Trouver le progress exact pour chaque checkpoint Y
-      const pathLength = path.getTotalLength();
-      const checkpointYPositions = [100, 400, 700, 1000, 1900]; // Y des checkpoints
-      const tooltipIds = ["tooltip1", "tooltip2", "tooltip3", "tooltip4"];
-
-      // Calculer les progress pour chaque checkpoint
-      const checkpointProgresses = checkpointYPositions.map((targetY) => {
-        // Chercher le point sur le path qui correspond à ce Y
-        let closestProgress = 0;
-        let minDiff = Infinity;
-
-        for (let i = 0; i <= 100; i++) {
-          const testProgress = i / 100;
-          const testPos = testProgress * pathLength;
-          const point = path.getPointAtLength(testPos);
-          const diff = Math.abs(point.y - targetY);
-
-          if (diff < minDiff) {
-            minDiff = diff;
-            closestProgress = testProgress;
-          }
-        }
-        return closestProgress;
+      ScrollTrigger.addEventListener("refresh", () => {
+        scheduleCarUpdate(carMotion.progress || 0);
       });
 
-      // Créer les checkpoints avec une plage étroite autour de chaque position
-      const checkpoints = [
-        { id: "tooltip1", center: checkpointProgresses[0], range: 0.08 }, // Départ
-        { id: "tooltip2", center: checkpointProgresses[1], range: 0.08 }, // Algésiras
-        { id: "tooltip3", center: checkpointProgresses[2], range: 0.08 }, // Rabat
-        { id: "tooltip4", center: checkpointProgresses[3], range: 0.12 }, // Merzouga → Arrivée
+      // Mettre à jour la position de la voiture lors du resize
+      window.addEventListener("resize", () => {
+        scheduleCarUpdate(carMotion.progress || 0);
+      });
+
+      // Gérer l'affichage des tooltips aux positions stratégiques
+      // Nouvelles positions Y des checkpoints
+      const checkpointYPositions = [200, 440, 660, 880, 1140, 1700]; // Ardèche, Biarritz, Algeciras, Grand Sud, Merzouga, Marrakech
+
+      // Calculer précisément le progress en se basant sur la longueur du path
+      const checkpointProgresses = checkpointYPositions.map((targetY) => {
+        const { length } = findPointAtY(targetY);
+        return length / pathLength;
+      });
+
+      // Créer les tooltips avec des plages non chevauchantes autour de chaque étape
+      const tooltipIds = [
+        "tooltip0",
+        "tooltip1",
+        "tooltip2",
+        "tooltip3",
+        "tooltip4",
+        "tooltip5",
       ];
+
+      const checkpoints = tooltipIds.map((id, index) => {
+        const y = checkpointYPositions[index];
+        const start = index === 0 ? -Infinity : y;
+        const end =
+          index === tooltipIds.length - 1
+            ? Infinity
+            : checkpointYPositions[index + 1];
+
+        return { id, start, end, y };
+      });
 
       ScrollTrigger.create({
         trigger: ".journey",
-        start: "top top",
-        end: "bottom bottom",
+        start: "top bottom",
+        end: "bottom top",
         onUpdate: (self) => {
-          const progress = self.progress;
+          // Vérifier si Ardèche est passée au centre
+          const roadRect = roadSvg.getBoundingClientRect();
+          const scaleY = roadSvg.clientHeight / viewBox.height;
+          const ardecheY = 200;
+          const ardecheScreenY = roadRect.top + (ardecheY * scaleY);
+          const screenCenterY = window.innerHeight / 2;
+          const ardechePassedCenter = ardecheScreenY < screenCenterY;
+          const centerYInSVG = (screenCenterY - roadRect.top) / scaleY;
 
-          checkpoints.forEach((checkpoint) => {
-            const el = document.getElementById(checkpoint.id);
-            const start = checkpoint.center - checkpoint.range / 2;
-            const end = checkpoint.center + checkpoint.range / 2;
-
-            if (progress >= start && progress <= end) {
-              el.classList.add("show");
-            } else {
+          // Les tooltips ne s'affichent qu'après que Ardèche soit passée au centre
+          if (!ardechePassedCenter) {
+            // Cacher tous les tooltips avant que la voiture commence à bouger
+            checkpoints.forEach((checkpoint) => {
+              const el = document.getElementById(checkpoint.id);
               el.classList.remove("show");
-            }
-          });
+            });
+          } else {
+            // Afficher le tooltip correspondant à la section actuelle du tracé
+            let activeIndex = -1;
+            checkpoints.forEach((checkpoint, index) => {
+              if (centerYInSVG >= checkpoint.start && centerYInSVG < checkpoint.end) {
+                activeIndex = index;
+              }
+            });
+
+            checkpoints.forEach((checkpoint, index) => {
+              const el = document.getElementById(checkpoint.id);
+              if (index === activeIndex) {
+                el.classList.add("show");
+              } else {
+                el.classList.remove("show");
+              }
+            });
+          }
         },
       });
     </script>
